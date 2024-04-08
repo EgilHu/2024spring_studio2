@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using Google.Protobuf.Collections;
 using Mediapipe;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+
 public class HandToCircleMapper : MonoBehaviour
 {
-    [SerializeField] private ExampleGetHandtrackOutput _exampleGetHandtrackOutput;
-    GameObject circle;
+    // Start is called before the first frame update
+
     void Start()
     {
 
@@ -17,7 +15,19 @@ public class HandToCircleMapper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        circle.transform.position = new Vector3(_exampleGetHandtrackOutput.GetHandLandmarks(handLandmarkList.Landmark[x].X), _exampleGetHandtrackOutput.GetHandLandmarks(0));
+        this.transform.position = HandPosition;
+        Debug.Log(HandPosition);
     }
 
+    public Vector3 HandPosition;
+
+    public void GetHandLandmarks(IReadOnlyList<NormalizedLandmarkList> _landmarkList)
+    {
+        if (_landmarkList != null && _landmarkList.Count > 0)
+        {
+            NormalizedLandmarkList handLandmarkList = _landmarkList[0]; //这个handLandmarkList包含手部21个关键点
+            HandPosition = new Vector3(handLandmarkList.Landmark[0].X, handLandmarkList.Landmark[0].Y,
+                handLandmarkList.Landmark[0].Z);
+        }
+    }
 }
