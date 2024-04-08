@@ -1,12 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using Mediapipe;
 using UnityEngine;
 
 public class HandToCircleMapper : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Transform handObject; // Reference to the object that will follow the hand position
 
+    // Start is called before the first frame update
     void Start()
     {
 
@@ -15,19 +15,27 @@ public class HandToCircleMapper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = HandPosition;
-        Debug.Log(HandPosition);
-    }
 
-    public Vector3 HandPosition;
+    }
 
     public void GetHandLandmarks(IReadOnlyList<NormalizedLandmarkList> _landmarkList)
     {
-        if (_landmarkList != null && _landmarkList.Count > 0)
+        if (_landmarkList != null)
         {
-            NormalizedLandmarkList handLandmarkList = _landmarkList[0]; //这个handLandmarkList包含手部21个关键点
-            HandPosition = new Vector3(handLandmarkList.Landmark[0].X, handLandmarkList.Landmark[0].Y,
-                handLandmarkList.Landmark[0].Z);
+            NormalizedLandmarkList handLandmarkList = _landmarkList[0]; // Get the first hand landmark list
+            if (handObject != null)
+            {
+                // Assuming the first landmark represents the palm position
+                NormalizedLandmark palmPosition = handLandmarkList.Landmark[0];
+
+                // Convert normalized coordinates to world position (you may need to adjust the scale and offset)
+                Vector3 handWorldPosition = new Vector3(palmPosition.X * 10f, palmPosition.Y * 10f, -palmPosition.Z * 10f);
+
+                // Update the position of the handObject to follow the hand position
+                handObject.position = handWorldPosition;
+                Debug.Log("Hand Position: " + handWorldPosition);
+
+            }
         }
     }
 }
