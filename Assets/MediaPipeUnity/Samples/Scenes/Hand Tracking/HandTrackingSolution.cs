@@ -18,6 +18,7 @@ namespace Mediapipe.Unity.Sample.HandTracking
     [SerializeField] private NormalizedRectListAnnotationController _handRectsFromLandmarksAnnotationController;
     [SerializeField] private DebugHandLandMarks _debugHandLandMarks;
     [SerializeField] private ExampleGetHandtrackOutput _exampleGetHandtrackOutput;
+    [SerializeField] private HandToCircleMapper _handToCircleMapper;
     public HandTrackingGraph.ModelComplexity modelComplexity
     {
       get => graphRunner.modelComplexity;
@@ -102,7 +103,7 @@ namespace Mediapipe.Unity.Sample.HandTracking
       _handLandmarksAnnotationController.DrawLater(value);
       _debugHandLandMarks.DebugBonelength(value);
       _exampleGetHandtrackOutput.GetHandLandmarks(value);
-
+      _handToCircleMapper.GetHandLandmarks(value);
     }
     
     private void OnHandWorldLandmarksOutput(object stream, OutputStream<List<LandmarkList>>.OutputEventArgs eventArgs)
