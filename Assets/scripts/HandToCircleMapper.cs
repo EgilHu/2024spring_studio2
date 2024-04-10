@@ -11,7 +11,7 @@ public class HandToCircleMapper : MonoBehaviour
     private Vector3 initPosition;
 
     private Vector3 fixPositionhelper;
-    
+
     private bool handPositionChanged = false;
     // Start is called before the first frame update
     void Start()
@@ -52,8 +52,8 @@ public class HandToCircleMapper : MonoBehaviour
 
                 // Update the position of the handObject to follow the hand position
                 this.handWorldPosition = handWorldPosition;
-                
-                
+
+
                 handPositionChanged = true;
             }
         }

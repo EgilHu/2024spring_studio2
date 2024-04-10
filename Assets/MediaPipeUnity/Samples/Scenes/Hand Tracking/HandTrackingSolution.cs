@@ -79,7 +79,7 @@ namespace Mediapipe.Unity.Sample.HandTracking
       _handLandmarksAnnotationController.DrawNow(result.handLandmarks, result.handedness);
       // TODO: render HandWorldLandmarks annotations
       _handRectsFromLandmarksAnnotationController.DrawNow(result.handRectsFromLandmarks);
-      
+
     }
 
     private void OnPalmDetectionsOutput(object stream, OutputStream<List<Detection>>.OutputEventArgs eventArgs)
@@ -105,7 +105,7 @@ namespace Mediapipe.Unity.Sample.HandTracking
       _exampleGetHandtrackOutput.GetHandLandmarks(value);
       _handToCircleMapper.GetHandLandmarks(value);
     }
-    
+
     private void OnHandWorldLandmarksOutput(object stream, OutputStream<List<LandmarkList>>.OutputEventArgs eventArgs)
     {
       var packet = eventArgs.packet;
