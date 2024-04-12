@@ -8,8 +8,11 @@ public class HandToCircleMapper : MonoBehaviour
 
     private Vector3 handWorldPosition;
 
+    // All position variables
     private Vector3 initPosition;
 
+    private Vector3 lastObjPosition;
+        
     private Vector3 fixPositionhelper;
 
     private bool handPositionChanged = false;
@@ -19,22 +22,36 @@ public class HandToCircleMapper : MonoBehaviour
         initPosition = handObject.transform.position;
         handWorldPosition = Vector3.zero;
         fixPositionhelper = Vector3.zero;
+        lastObjPosition = initPosition;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        if (handPositionChanged)
+        if (handPositionChanged && Input.GetKey(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Space))
         {
-            handObject.position = initPosition + handWorldPosition + fixPositionhelper;
+            handObject.position = lastObjPosition + (handWorldPosition - fixPositionhelper);
             Debug.Log("Hand Position: " + handWorldPosition);
             handPositionChanged = false;
         }
-
-        if (Input.GetKeyDown(KeyCode.K))
+        
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            fixPositionhelper = -handWorldPosition;
+            fixPositionhelper = handWorldPosition;
         }
+        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            lastObjPosition = initPosition;
+            fixPositionhelper = handWorldPosition;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            lastObjPosition = handObject.position;
+        }
+
+
     }
 
     public void GetHandLandmarks(IReadOnlyList<NormalizedLandmarkList> _landmarkList)

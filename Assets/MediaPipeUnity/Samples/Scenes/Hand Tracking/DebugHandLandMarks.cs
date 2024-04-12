@@ -8,6 +8,13 @@ using UnityEngine.UI;
 
 public class DebugHandLandMarks : MonoBehaviour
 {
+    enum PalmState
+    {
+        Up,
+        Down,
+        None
+    }
+    
     private float previous_bone_length = 0.0f;
 
     public TextMeshProUGUI _debuginfo;
@@ -23,6 +30,8 @@ public class DebugHandLandMarks : MonoBehaviour
     private bool fist_detected = false;
 
     private bool palm_detected = false;
+
+    private PalmState _palmState = PalmState.None;
     
     private bool forwarding_detected = true;
 
@@ -35,6 +44,8 @@ public class DebugHandLandMarks : MonoBehaviour
     private float enqueue_timer = 0.0f;
 
     public float enqueue_stop_time = 0.1f;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +61,14 @@ public class DebugHandLandMarks : MonoBehaviour
         }
         else if (palm_detected && forwarding_detected)
         {
-            _debuginfo.text = "Palm";
+            if (_palmState == PalmState.Up)
+            {
+                _debuginfo.text = "Palm Up";
+            }
+            else
+            {
+                _debuginfo.text = "Palm Down";
+            }
         }
         else if (fist_detected)
         {
@@ -58,7 +76,14 @@ public class DebugHandLandMarks : MonoBehaviour
         }
         else if (palm_detected)
         {
-            _debuginfo.text = "Palm";
+            if (_palmState == PalmState.Up)
+            {
+                _debuginfo.text = "Palm Up";
+            }
+            else
+            {
+                _debuginfo.text = "Palm Down";
+            }
         }
         else if (forwarding_detected)
         {
@@ -195,6 +220,28 @@ public class DebugHandLandMarks : MonoBehaviour
 
         return detect_index && detect_middle && detect_ring && detect_pinky;
     }
+
+    PalmState DetectPalmState(IReadOnlyList<LandmarkList> _landmarkList)
+    {
+        RepeatedField<Landmark> landmark = _landmarkList[0].Landmark;
+        List<int> tip_list = new List<int> {4, 8, 12, 16, 20};
+        float tip_mean_y = 0.0f;
+        foreach (int tip in tip_list)
+        {
+            tip_mean_y += landmark[tip].Y;
+        }
+
+        tip_mean_y /= tip_list.Count;
+
+        if (tip_mean_y > landmark[0].Y)
+        {
+            return PalmState.Down;
+        }
+        else
+        {
+            return PalmState.Up;
+        }
+    }
     
     public void DebugWorldBonelength(IReadOnlyList<LandmarkList> _landmarkList)
     {
@@ -212,15 +259,17 @@ public class DebugHandLandMarks : MonoBehaviour
             if (DetectPalm(_landmarkList))
             {
                 palm_detected = true;
+                _palmState = DetectPalmState(_landmarkList);
             }
             else
             {
                 palm_detected = false;
+                _palmState = PalmState.None;
             }
         }
 
     }
-
+    
     float CalculateHandAveragevelocity()
     {
         float sum = 0.0f;
@@ -231,6 +280,7 @@ public class DebugHandLandMarks : MonoBehaviour
         Debug.Log(sum);
         return sum / hand_speed_queue.Count;
     }
+    
     public void DebugBonelength(IReadOnlyList<NormalizedLandmarkList> _landmarkList)
     {
         if (_landmarkList != null && !enqueue_stopped)
