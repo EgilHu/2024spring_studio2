@@ -277,7 +277,7 @@ public class DebugHandLandMarks : MonoBehaviour
         {
             sum += speed;
         }
-        Debug.Log(sum);
+        // Debug.Log(sum);
         return sum / hand_speed_queue.Count;
     }
     
@@ -309,6 +309,15 @@ public class DebugHandLandMarks : MonoBehaviour
             }
 
         }
+    }
+    
+    public bool DetectFistAttack()
+    {
+        return fist_detected && forwarding_detected;
+    }
 
+    public bool DetectFist()
+    {
+        return fist_detected;
     }
 }

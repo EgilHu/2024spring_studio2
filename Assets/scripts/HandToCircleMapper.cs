@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HandToCircleMapper : MonoBehaviour
 {
-    public Transform handObject; // Reference to the object that will follow the hand position
+    private Transform handObject; // Reference to the object that will follow the hand position
 
-    private Vector3 handWorldPosition;
+    public Vector3 handWorldPosition;
 
     // All position variables
     private Vector3 initPosition;
@@ -16,13 +16,17 @@ public class HandToCircleMapper : MonoBehaviour
     private Vector3 fixPositionhelper;
 
     private bool handPositionChanged = false;
+    
+    public Collider2D _collider2D;
     // Start is called before the first frame update
     void Start()
     {
+        handObject = this.transform;
         initPosition = handObject.transform.position;
         handWorldPosition = Vector3.zero;
         fixPositionhelper = Vector3.zero;
         lastObjPosition = initPosition;
+        _collider2D = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -31,7 +35,8 @@ public class HandToCircleMapper : MonoBehaviour
         if (handPositionChanged && Input.GetKey(KeyCode.Space) && !Input.GetKeyDown(KeyCode.Space))
         {
             handObject.position = lastObjPosition + (handWorldPosition - fixPositionhelper);
-            Debug.Log("Hand Position: " + handWorldPosition);
+            handObject.position = new Vector3(handObject.position.x, handObject.position.y, 0.0f);
+            // Debug.Log("Hand Position: " + handWorldPosition);
             handPositionChanged = false;
         }
         
