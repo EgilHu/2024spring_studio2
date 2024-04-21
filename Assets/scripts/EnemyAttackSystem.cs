@@ -18,6 +18,7 @@ public class EnemyAttackSystem : MonoBehaviour
     // 添加更多攻击方式的预制体
 
     private Animator animator;
+    private EnemyAttackType currentAttackType; // 声明当前的攻击类型变量
 
     void Start()
     {
@@ -29,7 +30,7 @@ public class EnemyAttackSystem : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(4f);
             Attack();
             // Debug.Log("Attack");
         }
@@ -66,5 +67,10 @@ public class EnemyAttackSystem : MonoBehaviour
     public void DestroyPrefab(GameObject prefab)
     {
         Destroy(prefab);
+    }
+
+    public EnemyAttackType GetCurrentAttackType()
+    {
+        return currentAttackType;
     }
 }
