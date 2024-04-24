@@ -399,7 +399,7 @@ MonoBehaviour:
   _openGlEsConfig: {fileID: 4900000, guid: 155e81a0de3136db88c8ac8c72fad8b7, type: 3}
   _timeoutMicrosec: 50000
   modelComplexity: 1
-  maxNumHands: 1
+  maxNumHands: 2
   _minDetectionConfidence: 0.7
   _minTrackingConfidence: 0.7
 --- !u!114 &275874969
@@ -616,7 +616,6 @@ GameObject:
   - component: {fileID: 449332165}
   - component: {fileID: 449332164}
   - component: {fileID: 449332163}
-  - component: {fileID: 449332166}
   m_Layer: 0
   m_Name: EnemyAttack
   m_TagString: Untagged
@@ -685,18 +684,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &449332166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 449332162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9900a98f8bd5335439c4e5fb038219e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &544060753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1174,7 +1161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &771725386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1712,7 +1699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debuginfo: {fileID: 138027318}
   _stiketimeinfo: {fileID: 1880466641}
-  velocity_threshold: 0.0035
+  velocity_threshold: 0.0025
   fist_threshold: 0.015
   palm_threshold: 0.01
   num_frames_to_avarage: 30
