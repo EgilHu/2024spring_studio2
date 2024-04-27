@@ -400,8 +400,8 @@ MonoBehaviour:
   _timeoutMicrosec: 50000
   modelComplexity: 1
   maxNumHands: 2
-  _minDetectionConfidence: 0.7
-  _minTrackingConfidence: 0.7
+  _minDetectionConfidence: 0.6
+  _minTrackingConfidence: 0.6
 --- !u!114 &275874969
 MonoBehaviour:
   m_ObjectHideFlags: 0

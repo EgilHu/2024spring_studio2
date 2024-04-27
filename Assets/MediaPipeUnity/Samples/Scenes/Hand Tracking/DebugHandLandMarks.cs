@@ -423,18 +423,18 @@ public class DebugHandLandMarks : MonoBehaviour
         return double_fist_detected;
     }
     
-    public bool DetectPalmAttack()
+    public bool DetectSinglePalmAttack()
     {
-        return palm_detected && forwarding_detected;
+        return palm_detected && (_palmState == PalmState.Up) && forwarding_detected && !double_forwarding_detected;
     }
     
     public bool DetectDoublePalmAttack()
     {
-        return palm_detected && double_forwarding_detected;
+        return palm_detected && (_palmState == PalmState.Up) && double_forwarding_detected;
     }
 
     public bool DetectPalmDownAttack()
     {
-        return palm_detected && (_palmState == PalmState.Down) && forwarding_detected;
+        return palm_detected && (_palmState == PalmState.Down) && forwarding_detected && !double_forwarding_detected;
     }
 }

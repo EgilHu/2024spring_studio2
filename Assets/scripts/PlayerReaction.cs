@@ -47,7 +47,7 @@ public class PlayerReaction : MonoBehaviour
         {
             CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.MiddleAttack);
         }
-        else if (_debugHandLandMarks.DetectPalmAttack())
+        else if (_debugHandLandMarks.DetectSinglePalmAttack())
         {
             CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.SinglePalmAttack);
         }
