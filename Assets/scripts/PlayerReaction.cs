@@ -59,6 +59,14 @@ public class PlayerReaction : MonoBehaviour
         {
             CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.UpSideAttack);
         }
+        else if (_debugHandLandMarks.DetectPalmRight())
+        {
+            CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.RightSideAttack);
+        }
+        else if (_debugHandLandMarks.DetectPalmLeft())
+        {
+            CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.LeftSideAttack);
+        }
     }
 
     void CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType expectedAttackType)

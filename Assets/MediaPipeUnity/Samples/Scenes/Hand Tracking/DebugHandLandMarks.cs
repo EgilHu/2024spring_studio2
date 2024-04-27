@@ -15,10 +15,21 @@ public class DebugHandLandMarks : MonoBehaviour
         Down,
         None
     }
+
+    enum HorizonState
+    {
+        Right,
+        Left,
+        None
+    }
     
     private float previous_bone_length = 0.0f;
     private float previous_bone_length1 = 0.0f;
     private float previous_bone_length2 = 0.0f;
+    
+    private Vector3 previous_wrist_pos = Vector3.zero;
+    private Vector3 previous_wrist_pos1 = Vector3.zero;
+    private Vector3 previous_wrist_pos2 = Vector3.zero;
     
     public TextMeshProUGUI _debuginfo;
     public TextMeshProUGUI _stiketimeinfo;
@@ -26,6 +37,8 @@ public class DebugHandLandMarks : MonoBehaviour
     private string debug_text = "";
     
     public float velocity_threshold = 0.1f;
+    public float horizon_velocity_threshold = 0.1f;
+    
     public float fist_threshold = 0.01f;
     public float palm_threshold = 0.005f;
     public int num_frames_to_avarage = 30;
@@ -35,7 +48,8 @@ public class DebugHandLandMarks : MonoBehaviour
     private bool double_fist_detected = false;
     
     private bool palm_detected = false;
-
+    
+    private HorizonState _horizonState = HorizonState.None;
     private PalmState _palmState = PalmState.None;
     
     private bool forwarding_detected = false;
@@ -45,12 +59,19 @@ public class DebugHandLandMarks : MonoBehaviour
     private Queue<float> single_hand_speed_queue = new Queue<float>();
     private Queue<float> left_hand_speed_queue = new Queue<float>();
     private Queue<float> right_hand_speed_queue = new Queue<float>();
+    
+    private Queue<float> single_hand_horizon_speed_queue = new Queue<float>();
+    private Queue<float> left_hand_horizon_speed_queue = new Queue<float>();
+    private Queue<float> right_hand_horizon_speed_queue = new Queue<float>();
+    
     private int strike_times = 0;
 
     private bool enqueue_stopped = false;
-
+    private bool horizon_enqueue_stopped = false;
+    
     private float enqueue_timer = 0.0f;
-
+    private float horizon_enqueue_timer = 0.0f;
+    
     public float enqueue_stop_time = 0.1f;
     
     
@@ -112,6 +133,17 @@ public class DebugHandLandMarks : MonoBehaviour
             {
                 enqueue_timer = 0.0f;
                 enqueue_stopped = false;
+            }
+        }
+        
+        // 0.1s后再次进行平均速度的判断
+        if (horizon_enqueue_stopped)
+        {
+            horizon_enqueue_timer += Time.deltaTime;
+            if (horizon_enqueue_timer >= enqueue_stop_time)
+            {
+                horizon_enqueue_timer = 0.0f;
+                horizon_enqueue_stopped = false;
             }
         }
     }
@@ -327,7 +359,64 @@ public class DebugHandLandMarks : MonoBehaviour
         return sum / queue.Count;
     }
 
+    public void DebugHandHorizonSpeed(IReadOnlyList<NormalizedLandmarkList> _landmarkList)
+    {
+        if (_landmarkList != null && !horizon_enqueue_stopped)
+        {
+            // single_hand_speed
+            float hand_speed = 0.0f;
+            if (_landmarkList.Count < 2)
+            {
+                Vector3 wrist_pos = new Vector3(_landmarkList[0].Landmark[0].X, _landmarkList[0].Landmark[0].Y,
+                    _landmarkList[0].Landmark[0].Z);
+                hand_speed = wrist_pos.x - previous_wrist_pos.x;
+                previous_wrist_pos = wrist_pos;
+            }
+            else
+            {
+                Vector3 left_wrist_pos = new Vector3(_landmarkList[0].Landmark[0].X, _landmarkList[0].Landmark[0].Y,
+                    _landmarkList[0].Landmark[0].Z);
+                Vector3 right_wrist_pos = new Vector3(_landmarkList[1].Landmark[0].X, _landmarkList[1].Landmark[0].Y,
+                    _landmarkList[1].Landmark[0].Z);
+                float left_hand_speed = left_wrist_pos.x - previous_wrist_pos1.x;
+                float right_hand_speed = right_wrist_pos.x - previous_wrist_pos2.x;
+                hand_speed = Mathf.Max(left_hand_speed, right_hand_speed);
+                previous_wrist_pos1 = left_wrist_pos;
+                previous_wrist_pos2 = right_wrist_pos;
+                left_hand_horizon_speed_queue.Enqueue(left_hand_speed);
+                right_hand_horizon_speed_queue.Enqueue(right_hand_speed);
+            }
+            single_hand_horizon_speed_queue.Enqueue(hand_speed);
+            
+            if (single_hand_horizon_speed_queue.Count > num_frames_to_avarage)
+            {
+                if (CalculateHandAveragevelocity(single_hand_horizon_speed_queue) > horizon_velocity_threshold)
+                {
+                    _horizonState = HorizonState.Right;
+                    horizon_enqueue_stopped = true;
+                }
+                else if (CalculateHandAveragevelocity(single_hand_horizon_speed_queue) < -horizon_velocity_threshold)
+                {
+                    _horizonState = HorizonState.Left;
+                    horizon_enqueue_stopped = true;
+                }
+                else
+                {
+                    _horizonState = HorizonState.None;
+                }
+                single_hand_horizon_speed_queue.Clear();
+            }
 
+            // double_hand_speed
+            if (left_hand_horizon_speed_queue.Count > num_frames_to_avarage &&
+                right_hand_horizon_speed_queue.Count > num_frames_to_avarage)
+            {
+                // TODO: Currently do nothing to double hand horizontal
+                left_hand_horizon_speed_queue.Clear();
+                right_hand_horizon_speed_queue.Clear();
+            }
+        }
+    }
     public void DebugBonelength(IReadOnlyList<NormalizedLandmarkList> _landmarkList)
     {
         if (_landmarkList != null && !enqueue_stopped)
@@ -437,4 +526,15 @@ public class DebugHandLandMarks : MonoBehaviour
     {
         return palm_detected && (_palmState == PalmState.Down) && forwarding_detected && !double_forwarding_detected;
     }
+
+    public bool DetectPalmRight()
+    {
+        return palm_detected && (_horizonState == HorizonState.Right);
+    }
+
+    public bool DetectPalmLeft()
+    {
+        return palm_detected && (_horizonState == HorizonState.Left);
+    }
+    
 }

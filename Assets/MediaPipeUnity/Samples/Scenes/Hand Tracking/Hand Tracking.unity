@@ -1700,6 +1700,7 @@ MonoBehaviour:
   _debuginfo: {fileID: 138027318}
   _stiketimeinfo: {fileID: 1880466641}
   velocity_threshold: 0.0025
+  horizon_velocity_threshold: 0.005
   fist_threshold: 0.015
   palm_threshold: 0.01
   num_frames_to_avarage: 30

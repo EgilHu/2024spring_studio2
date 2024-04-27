@@ -101,6 +101,7 @@ namespace Mediapipe.Unity.Sample.HandTracking
       var packet = eventArgs.packet;
       var value = packet == null ? default : packet.Get(NormalizedLandmarkList.Parser);
       _handLandmarksAnnotationController.DrawLater(value);
+      _debugHandLandMarks.DebugHandHorizonSpeed(value);
       _debugHandLandMarks.DebugBonelength(value);
       _exampleGetHandtrackOutput.GetHandLandmarks(value);
       _handToCircleMapper.GetHandLandmarks(value);
