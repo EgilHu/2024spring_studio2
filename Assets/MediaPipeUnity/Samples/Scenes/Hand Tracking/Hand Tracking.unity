@@ -635,19 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfce01b7003bf6478ee9cd58660e422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animatorOverrides:
-  - {fileID: 22100000, guid: 09c1714b12a7cc64695fddbe3cae0b24, type: 2}
-  - {fileID: 22100000, guid: d08482ef73a758540a5d08a5af50d849, type: 2}
-  - {fileID: 22100000, guid: ad492c1d3a48aec409846dbac92e5e32, type: 2}
-  - {fileID: 22100000, guid: cd0f06c65f58e1846815c8bce99d4e3d, type: 2}
-  - {fileID: 22100000, guid: d61e3333e501e854abc6ffeb40a3c20a, type: 2}
-  - {fileID: 22100000, guid: 8edab627a79062d43b97ec78374bed82, type: 2}
-  leftSideAttackPrefab: {fileID: 8916643114059648158, guid: fa11f8914984a244fa702fbe80ac4842, type: 3}
-  singlePalmAttackPrefab: {fileID: 3771383126810086204, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
-  rightSideAttackPrefab: {fileID: 2005535446939502964, guid: e7104b9a2237f834b9c003961327ac06, type: 3}
-  middleAttackPrefab: {fileID: 6987561951860397761, guid: 6537733b3d88a454ba90cb9eb22f930f, type: 3}
-  upSideAttackPrefab: {fileID: 7842496680236275421, guid: 6540693326b8efe4f874c691870ef954, type: 3}
-  doublePalmAttackPrefab: {fileID: 5407166833989249736, guid: 98722b5d85399e343b5b4155b67019d7, type: 3}
+  enemyAttackMoves: []
 --- !u!95 &449332164
 Animator:
   serializedVersion: 5
@@ -1531,6 +1519,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa11f8914984a244fa702fbe80ac4842, type: 3}
+--- !u!1001 &1104270722
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1907079100654025685, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -38.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907079100654025685, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907079100654025685, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907079100654025685, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907079100654025685, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907079100654025685, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907079100654025685, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907079100654025685, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907079100654025685, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907079100654025685, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771383126810086204, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
+      propertyPath: m_Name
+      value: SinglePalmAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771383126810086204, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
 --- !u!1 &1129773305
 GameObject:
   m_ObjectHideFlags: 0
@@ -2706,3 +2755,4 @@ SceneRoots:
   - {fileID: 771725387}
   - {fileID: 3995952168957036771}
   - {fileID: 8866230625564084145}
+  - {fileID: 1104270722}

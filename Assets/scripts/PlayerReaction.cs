@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-public class PlayerReaction : MonoBehaviour
+/*public class PlayerReaction : MonoBehaviour
 {
     private EnemyAttackSystem enemyAttackSystem;
     private DebugHandLandMarks _debugHandLandMarks;
@@ -83,4 +82,59 @@ public class PlayerReaction : MonoBehaviour
         }
     }
 
+}*/
+
+public class PlayerReaction : MonoBehaviour
+{
+    private DebugHandLandMarks _debugHandLandMarks;
+    void Start()
+    { 
+        //enemyAttackSystem = FindObjectOfType<EnemyAttackSystem>();
+        _debugHandLandMarks = FindObjectOfType<DebugHandLandMarks>();
+    }
+    // 在收到信号时调用的方法，根据不同的攻击类型做出不同的反应
+    {
+        switch (type)
+        {
+            case EnemyAttackSystem.EnemyAttackType.LeftSideAttack :
+            case EnemyAttackSystem.EnemyAttackType.RightSideAttack :
+            case EnemyAttackSystem.EnemyAttackType.MiddleAttack :
+            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack :
+            case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack :
+            case EnemyAttackSystem.EnemyAttackType.UpSideAttack :
+                StartCoroutine(CounterAttack(type));
+                break;
+            default:
+                Debug.LogWarning("Unhandled attack type: " + type);
+                break;
+        }
+    }
+
+    private System.Collections.IEnumerator CounterAttack(EnemyAttackSystem.EnemyAttackType type)
+    {
+        bool successfulReaction = false;
+        bool perfectReaction = false;
+        
+    }
+    
+    private _debugHandLandMarks GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
+    {
+        switch (type)
+        {
+            case EnemyAttackSystem.EnemyAttackType.LeftSideAttack:
+                return _debugHandLandMarks.DetectPalmLeft();
+            case EnemyAttackSystem.EnemyAttackType.RightSideAttack:
+                return _debugHandLandMarks.DetectPalmRight();
+            case EnemyAttackSystem.EnemyAttackType.MiddleAttack:
+                return _debugHandLandMarks.DetectDoubleFist();
+            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack:
+                return _debugHandLandMarks.DetectSinglePalmAttack();
+            case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack:
+                return _debugHandLandMarks.DetectDoublePalmAttack();
+            case EnemyAttackSystem.EnemyAttackType.UpSideAttack:
+                return _debugHandLandMarks.DetectPalmDownAttack();
+            default:
+                return null;
+        }
+    }
 }
