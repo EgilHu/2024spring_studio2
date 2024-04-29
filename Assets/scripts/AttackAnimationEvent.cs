@@ -80,6 +80,7 @@ public class AttackAnimationEvent : MonoBehaviour
         }
     }
     public void SpawnUpSideAttack()
+    
     {
         if (enemyAttackSystem != null)
         {

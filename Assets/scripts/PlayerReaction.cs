@@ -63,7 +63,7 @@ public class PlayerReaction : MonoBehaviour
         //enemyAttackSystem = FindObjectOfType<EnemyAttackSystem>();
         _debugHandLandMarks = FindObjectOfType<DebugHandLandMarks>();
     }
-    
+    bool isStartConterAttack = false;
     // 在收到信号时调用的方法，根据不同的攻击类型做出不同的反应
     public void ReactToSignal(EnemyAttackSystem.EnemyAttackType type)
     {
@@ -85,15 +85,15 @@ public class PlayerReaction : MonoBehaviour
 
     private System.Collections.IEnumerator CounterAttack(EnemyAttackSystem.EnemyAttackType type)
     {
-        bool successfulReaction = false;
         //bool perfectReaction = false;
         
-        /*
-        yield return new WaitForSeconds(4f);
-        */
+        /*yield return new WaitForSeconds(4f);*/
+        bool successfulReaction = false;
+
+        isStartConterAttack = true;
         KeyCode keyCode = GetCorrectReactionTypeForAttack(type);
         // 检查玩家是否在此期间做出正确输入
-        if (Input.GetKeyDown(KeyCode.Q))/*这里我暂用input表示了，请修改一下*/
+        if (Input.GetKey(keyCode))/*这里我暂用input表示了，请修改一下*/
         {
             // 如果回击正确，生成粒子效果表示回击成功
             successfulReaction = true;
