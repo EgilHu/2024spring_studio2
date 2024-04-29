@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /*public class PlayerReaction : MonoBehaviour
 {
@@ -9,36 +10,6 @@ using UnityEngine;
         enemyAttackSystem = FindObjectOfType<EnemyAttackSystem>();
         _debugHandLandMarks = FindObjectOfType<DebugHandLandMarks>();
     }
-
-    // void Update()
-    // {
-    //     // 检查玩家按键并调用相应的反应方法
-    //     if (Input.GetKeyDown(KeyCode.Q))
-    //     {
-    //         CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.LeftSideAttack);
-    //     }
-    //     else if (Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.SinglePalmAttack);
-    //     }
-    //     else if (Input.GetKeyDown(KeyCode.P))
-    //     {
-    //         CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.RightSideAttack);
-    //     }
-    //     else if (Input.GetKeyDown(KeyCode.O))
-    //     {
-    //         CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.MiddleAttack);
-    //     }
-    //     else if(Input.GetKeyDown(KeyCode.I))
-    //     {
-    //         CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.UpSideAttack);
-    //     }
-    //     else if (Input.GetKeyDown(KeyCode.K))
-    //     {
-    //         CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.DoublePalmAttack);
-    //     }
-    //     // 添加更多按键和对应的反应
-    // }
 
     void Update()
     {
@@ -117,11 +88,12 @@ public class PlayerReaction : MonoBehaviour
         bool successfulReaction = false;
         //bool perfectReaction = false;
         
-        yield return new WaitForSeconds(3f);
-        _debugHandLandMarks keyCode = GetCorrectReactionTypeForAttack(type);
-        
+        /*
+        yield return new WaitForSeconds(4f);
+        */
+        KeyCode keyCode = GetCorrectReactionTypeForAttack(type);
         // 检查玩家是否在此期间做出正确输入
-        if (Input.GetKeyDown(keyCode))/*这里我暂用input表示了，请修改一下*/
+        if (Input.GetKeyDown(KeyCode.Q))/*这里我暂用input表示了，请修改一下*/
         {
             // 如果回击正确，生成粒子效果表示回击成功
             successfulReaction = true;
@@ -133,9 +105,30 @@ public class PlayerReaction : MonoBehaviour
             Debug.Log("YOU DIE");
         }
 
+        yield return null;
+
     }
-    
-    private _debugHandLandMarks GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
+    private KeyCode GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
+    {
+        switch (type)
+        {
+            case EnemyAttackSystem.EnemyAttackType.LeftSideAttack:
+                return KeyCode.Q;
+            case EnemyAttackSystem.EnemyAttackType.RightSideAttack:
+                return KeyCode.P;
+            case EnemyAttackSystem.EnemyAttackType.MiddleAttack:
+                return KeyCode.I;
+            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack:
+                return KeyCode.Space;
+            case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack:
+                return KeyCode.B;
+            case EnemyAttackSystem.EnemyAttackType.UpSideAttack:
+                return KeyCode.O;
+            default:
+                return KeyCode.None;
+        }
+    }
+    /*private _debugHandLandMarks GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
     {
         switch (type)
         {
@@ -154,5 +147,5 @@ public class PlayerReaction : MonoBehaviour
             default:
                 return null;
         }
-    }
+    }*/
 }

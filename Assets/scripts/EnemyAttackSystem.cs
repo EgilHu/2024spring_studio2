@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class EnemyAttackSystem : MonoBehaviour
 {
+    private PlayerReaction playerReaction;
+    void Start()
+    {
+        playerReaction = FindObjectOfType<PlayerReaction>();
+    }
+    
     public enum EnemyAttackType
     {
         LeftSideAttack,
@@ -31,6 +37,7 @@ public class EnemyAttackSystem : MonoBehaviour
         if (move != null)
         {
             Instantiate(move.prefab, transform.position, Quaternion.identity);
+            playerReaction.ReactToSignal(type);
         }
         else
         {
