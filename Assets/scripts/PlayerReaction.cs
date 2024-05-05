@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 /*public class PlayerReaction : MonoBehaviour
 {
@@ -64,7 +63,7 @@ public class PlayerReaction : MonoBehaviour
         //enemyAttackSystem = FindObjectOfType<EnemyAttackSystem>();
         _debugHandLandMarks = FindObjectOfType<DebugHandLandMarks>();
     }
-    bool isStartConterAttack = false; // 在收到信号时调用的方法，根据不同的攻击类型做出不同的反应
+    
     public Coroutine counterAttackCoroutine;
     public void ReactToSignal(EnemyAttackSystem.EnemyAttackType type)
     {
@@ -84,51 +83,32 @@ public class PlayerReaction : MonoBehaviour
         }
     }
     
-    public         bool successfulReaction = false;
+    public bool successfulReaction = false;
 
     public System.Collections.IEnumerator CounterAttack(EnemyAttackSystem.EnemyAttackType type)
     {
         //bool perfectReaction = false;
-
-        isStartConterAttack = true;
+        
         KeyCode keyCode = GetCorrectReactionTypeForAttack(type);
         // 检查玩家是否在此期间做出正确输入
-        float counterAttackTime = 0;
-
         while (true)
         {
-            try
+            if (Input.GetKey(keyCode))
             {
-                if (Input.GetKey(keyCode))
-                {
-                    successfulReaction = true;
-                    Debug.Log("Successful counterattack!");
-                    break;
-                }
-                successfulReaction = false;
-
-                counterAttackTime += Time.deltaTime; // 更新 counterAttackTime 变量
+                successfulReaction = true;
+                Debug.Log("Successful counterattack!");
+                break;
             }
-            catch (Exception ex)
-            {
-                Debug.LogError("Exception in CounterAttack coroutine: " + ex.Message);
-            }
-
+            successfulReaction = false;
             yield return null;
         }
-
-        try
+        
+        if (!successfulReaction)
         {
-            if (!successfulReaction)
-            {
-                Debug.Log("YOU DIE");
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError("Exception in CounterAttack coroutine: " + ex.Message);
-        }
+            Debug.Log("YOU DIE");
+        } 
     }
+    
     private KeyCode GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
     {
         switch (type)
