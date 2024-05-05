@@ -1,14 +1,17 @@
 using UnityEngine;
+using UnityEngine.Timeline;
+
 /*using System.Collections;*/
 
 public class EnemyAttackSystem : MonoBehaviour
 {
     private PlayerReaction playerReaction;
+
     void Start()
     {
         playerReaction = FindObjectOfType<PlayerReaction>();
     }
-    
+
     public enum EnemyAttackType
     {
         LeftSideAttack,
@@ -23,12 +26,12 @@ public class EnemyAttackSystem : MonoBehaviour
     [System.Serializable]
     public class EnemyAttackMove
     {
-        public EnemyAttackType type;// 攻击类型
+        public EnemyAttackType type; // 攻击类型
         public GameObject prefab;
         public AnimationClip animation;
     }
 
-    public EnemyAttackMove[] enemyAttackMoves;// 保存所有攻击招式的数组
+    public EnemyAttackMove[] enemyAttackMoves; // 保存所有攻击招式的数组
 
     public void SpawnEnemyAttack(EnemyAttackType type)
     {
@@ -44,7 +47,7 @@ public class EnemyAttackSystem : MonoBehaviour
             Debug.LogWarning("Attack type not found: " + type);
         }
     }
-    
+
     /*public AnimatorOverrideController[] animatorOverrides; // 每种攻击对应的Animator Override Controller
     public GameObject leftSideAttackPrefab;
     public GameObject singlePalmAttackPrefab;
@@ -174,4 +177,22 @@ public class EnemyAttackSystem : MonoBehaviour
     {
         return currentAttackType;
     }*/
+    public void StopCounterAttack()
+    {
+        if (playerReaction != null)
+        {
+
+            if (!playerReaction.successfulReaction)
+            {
+                Debug.Log("YOU DIE");
+            }
+            StopCoroutine(playerReaction.counterAttackCoroutine);
+
+        }
+        else
+        {
+            Debug.LogError("PlayerReaction is not initialized");
+        }
+    }
 }
+    

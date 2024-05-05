@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -63,8 +64,8 @@ public class PlayerReaction : MonoBehaviour
         //enemyAttackSystem = FindObjectOfType<EnemyAttackSystem>();
         _debugHandLandMarks = FindObjectOfType<DebugHandLandMarks>();
     }
-    bool isStartConterAttack = false;
-    // 在收到信号时调用的方法，根据不同的攻击类型做出不同的反应
+    bool isStartConterAttack = false; // 在收到信号时调用的方法，根据不同的攻击类型做出不同的反应
+    public Coroutine counterAttackCoroutine;
     public void ReactToSignal(EnemyAttackSystem.EnemyAttackType type)
     {
         switch (type)
@@ -75,38 +76,58 @@ public class PlayerReaction : MonoBehaviour
             case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack :
             case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack :
             case EnemyAttackSystem.EnemyAttackType.UpSideAttack :
-                StartCoroutine(CounterAttack(type));
+                counterAttackCoroutine = StartCoroutine(CounterAttack(type));
                 break;
             default:
                 Debug.LogWarning("Unhandled attack type: " + type);
                 break;
         }
     }
+    
+    public         bool successfulReaction = false;
 
-    private System.Collections.IEnumerator CounterAttack(EnemyAttackSystem.EnemyAttackType type)
+    public System.Collections.IEnumerator CounterAttack(EnemyAttackSystem.EnemyAttackType type)
     {
         //bool perfectReaction = false;
-        
-        /*yield return new WaitForSeconds(4f);*/
-        bool successfulReaction = false;
 
         isStartConterAttack = true;
         KeyCode keyCode = GetCorrectReactionTypeForAttack(type);
         // 检查玩家是否在此期间做出正确输入
-        if (Input.GetKey(keyCode))/*这里我暂用input表示了，请修改一下*/
+        float counterAttackTime = 0;
+
+        while (true)
         {
-            // 如果回击正确，生成粒子效果表示回击成功
-            successfulReaction = true;
-            Debug.Log("Successful counterattack!");
-        }
-        
-        if (!successfulReaction)
-        {
-            Debug.Log("YOU DIE");
+            try
+            {
+                if (Input.GetKey(keyCode))
+                {
+                    successfulReaction = true;
+                    Debug.Log("Successful counterattack!");
+                    break;
+                }
+                successfulReaction = false;
+
+                counterAttackTime += Time.deltaTime; // 更新 counterAttackTime 变量
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("Exception in CounterAttack coroutine: " + ex.Message);
+            }
+
+            yield return null;
         }
 
-        yield return null;
-
+        try
+        {
+            if (!successfulReaction)
+            {
+                Debug.Log("YOU DIE");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Exception in CounterAttack coroutine: " + ex.Message);
+        }
     }
     private KeyCode GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
     {
