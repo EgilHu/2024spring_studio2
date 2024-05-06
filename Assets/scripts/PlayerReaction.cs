@@ -59,10 +59,12 @@ using UnityEngine;
 public class PlayerReaction : MonoBehaviour
 {
     private DebugHandLandMarks _debugHandLandMarks;
+    private AudioManager audioManager;
     void Start()
     { 
         //enemyAttackSystem = FindObjectOfType<EnemyAttackSystem>();
         _debugHandLandMarks = FindObjectOfType<DebugHandLandMarks>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
     
     public Coroutine counterAttackCoroutine;
@@ -98,6 +100,7 @@ public class PlayerReaction : MonoBehaviour
             {
                 successfulReaction = true;
                 Debug.Log("Successful counterattack!");
+                audioManager.PlayAudio("punch");
                 Instantiate(playerAttackVFX, Vector3.zero, Quaternion.identity);
                 break;
             }
