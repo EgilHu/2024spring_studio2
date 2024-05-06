@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 /*public class PlayerReaction : MonoBehaviour
@@ -84,7 +85,7 @@ public class PlayerReaction : MonoBehaviour
     }
     
     public bool successfulReaction = false;
-
+    public GameObject playerAttackVFX;
     public System.Collections.IEnumerator CounterAttack(EnemyAttackSystem.EnemyAttackType type)
     {
         //bool perfectReaction = false;
@@ -97,6 +98,7 @@ public class PlayerReaction : MonoBehaviour
             {
                 successfulReaction = true;
                 Debug.Log("Successful counterattack!");
+                Instantiate(playerAttackVFX, Vector3.zero, Quaternion.identity);
                 break;
             }
             successfulReaction = false;
