@@ -92,11 +92,11 @@ public class PlayerReaction : MonoBehaviour
     {
         //bool perfectReaction = false;
         
-        KeyCode keyCode = GetCorrectReactionTypeForAttack(type);
+        // KeyCode keyCode = GetCorrectReactionTypeForAttack(type);
         // 检查玩家是否在此期间做出正确输入
         while (true)
         {
-            if (Input.GetKey(keyCode))
+            if (GetCorrectReactionTypeForAttack(type))
             {
                 successfulReaction = true;
                 Debug.Log("Successful counterattack!");
@@ -114,27 +114,28 @@ public class PlayerReaction : MonoBehaviour
         } 
     }
     
-    private KeyCode GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
-    {
-        switch (type)
-        {
-            case EnemyAttackSystem.EnemyAttackType.LeftSideAttack:
-                return KeyCode.Q;
-            case EnemyAttackSystem.EnemyAttackType.RightSideAttack:
-                return KeyCode.P;
-            case EnemyAttackSystem.EnemyAttackType.MiddleAttack:
-                return KeyCode.I;
-            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack:
-                return KeyCode.Space;
-            case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack:
-                return KeyCode.B;
-            case EnemyAttackSystem.EnemyAttackType.UpSideAttack:
-                return KeyCode.O;
-            default:
-                return KeyCode.None;
-        }
-    }
-    /*private _debugHandLandMarks GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
+    // private KeyCode GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
+    // {
+    //     switch (type)
+    //     {
+    //         case EnemyAttackSystem.EnemyAttackType.LeftSideAttack:
+    //             return KeyCode.Q;
+    //         case EnemyAttackSystem.EnemyAttackType.RightSideAttack:
+    //             return KeyCode.P;
+    //         case EnemyAttackSystem.EnemyAttackType.MiddleAttack:
+    //             return KeyCode.I;
+    //         case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack:
+    //             return KeyCode.Space;
+    //         case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack:
+    //             return KeyCode.B;
+    //         case EnemyAttackSystem.EnemyAttackType.UpSideAttack:
+    //             return KeyCode.O;
+    //         default:
+    //             return KeyCode.None;
+    //     }
+    // }
+    
+    private bool GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
     {
         switch (type)
         {
@@ -151,7 +152,7 @@ public class PlayerReaction : MonoBehaviour
             case EnemyAttackSystem.EnemyAttackType.UpSideAttack:
                 return _debugHandLandMarks.DetectPalmDownAttack();
             default:
-                return null;
+                return false;
         }
-    }*/
+    }
 }
