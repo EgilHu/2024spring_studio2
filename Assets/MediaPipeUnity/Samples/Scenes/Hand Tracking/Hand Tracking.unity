@@ -1799,7 +1799,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &875110609
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2336,8 +2336,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debuginfo: {fileID: 138027318}
   _stiketimeinfo: {fileID: 1880466641}
-  velocity_threshold: 0.0025
-  horizon_velocity_threshold: 0.005
+  velocity_threshold: 0.005
+  horizon_velocity_threshold: 0.01
+  horizon_left_velocity_threshold: -0.003
   fist_threshold: 0.015
   palm_threshold: 0.01
   num_frames_to_avarage: 30
@@ -2917,6 +2918,8 @@ PlayableDirector:
     value: {fileID: 449354390}
   - key: {fileID: 1396932576743521684, guid: d38da1c71ca118847b1740d386a83844, type: 2}
     value: {fileID: 999392135}
+  - key: {fileID: -14732130280705461, guid: d38da1c71ca118847b1740d386a83844, type: 2}
+    value: {fileID: 449354390}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1565279992

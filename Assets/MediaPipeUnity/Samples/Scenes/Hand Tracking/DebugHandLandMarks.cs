@@ -38,6 +38,7 @@ public class DebugHandLandMarks : MonoBehaviour
     
     public float velocity_threshold = 0.1f;
     public float horizon_velocity_threshold = 0.1f;
+    public float horizon_left_velocity_threshold = -0.1f;
     
     public float fist_threshold = 0.01f;
     public float palm_threshold = 0.005f;
@@ -365,28 +366,31 @@ public class DebugHandLandMarks : MonoBehaviour
         {
             // single_hand_speed
             float hand_speed = 0.0f;
+            float leftHand_speed = 0.0f;
             if (_landmarkList.Count < 2)
             {
-                Vector3 wrist_pos = new Vector3(_landmarkList[0].Landmark[0].X, _landmarkList[0].Landmark[0].Y,
-                    _landmarkList[0].Landmark[0].Z);
+                Vector3 wrist_pos = new Vector3(_landmarkList[0].Landmark[12].X, _landmarkList[0].Landmark[12].Y,
+                    _landmarkList[0].Landmark[12].Z);
                 hand_speed = wrist_pos.x - previous_wrist_pos.x;
                 previous_wrist_pos = wrist_pos;
             }
             else
             {
-                Vector3 left_wrist_pos = new Vector3(_landmarkList[0].Landmark[0].X, _landmarkList[0].Landmark[0].Y,
-                    _landmarkList[0].Landmark[0].Z);
-                Vector3 right_wrist_pos = new Vector3(_landmarkList[1].Landmark[0].X, _landmarkList[1].Landmark[0].Y,
-                    _landmarkList[1].Landmark[0].Z);
+                Vector3 left_wrist_pos = new Vector3(_landmarkList[0].Landmark[12].X, _landmarkList[0].Landmark[12].Y,
+                    _landmarkList[0].Landmark[12].Z);
+                Vector3 right_wrist_pos = new Vector3(_landmarkList[1].Landmark[12].X, _landmarkList[1].Landmark[12].Y,
+                    _landmarkList[1].Landmark[12].Z);
                 float left_hand_speed = left_wrist_pos.x - previous_wrist_pos1.x;
                 float right_hand_speed = right_wrist_pos.x - previous_wrist_pos2.x;
                 hand_speed = Mathf.Max(left_hand_speed, right_hand_speed);
+                leftHand_speed= Mathf.Min(left_hand_speed, right_hand_speed);
                 previous_wrist_pos1 = left_wrist_pos;
                 previous_wrist_pos2 = right_wrist_pos;
                 left_hand_horizon_speed_queue.Enqueue(left_hand_speed);
                 right_hand_horizon_speed_queue.Enqueue(right_hand_speed);
             }
             single_hand_horizon_speed_queue.Enqueue(hand_speed);
+            left_hand_horizon_speed_queue.Enqueue(leftHand_speed);
             
             if (single_hand_horizon_speed_queue.Count > num_frames_to_avarage)
             {
@@ -395,7 +399,7 @@ public class DebugHandLandMarks : MonoBehaviour
                     _horizonState = HorizonState.Right;
                     horizon_enqueue_stopped = true;
                 }
-                else if (CalculateHandAveragevelocity(single_hand_horizon_speed_queue) < -horizon_velocity_threshold)
+                else if (CalculateHandAveragevelocity(left_hand_horizon_speed_queue) < horizon_left_velocity_threshold)
                 {
                     _horizonState = HorizonState.Left;
                     horizon_enqueue_stopped = true;

@@ -2,60 +2,6 @@ using System;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-/*public class PlayerReaction : MonoBehaviour
-{
-    private EnemyAttackSystem enemyAttackSystem;
-    private DebugHandLandMarks _debugHandLandMarks;
-    void Start()
-    {
-        enemyAttackSystem = FindObjectOfType<EnemyAttackSystem>();
-        _debugHandLandMarks = FindObjectOfType<DebugHandLandMarks>();
-    }
-
-    void Update()
-    {
-        if (_debugHandLandMarks.DetectDoubleFist())
-        {
-            CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.MiddleAttack);
-        }
-        else if (_debugHandLandMarks.DetectSinglePalmAttack())
-        {
-            CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.SinglePalmAttack);
-        }
-        else if (_debugHandLandMarks.DetectDoublePalmAttack())
-        {
-            CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.DoublePalmAttack);
-        }
-        else if (_debugHandLandMarks.DetectPalmDownAttack())
-        {
-            CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.UpSideAttack);
-        }
-        else if (_debugHandLandMarks.DetectPalmRight())
-        {
-            CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.RightSideAttack);
-        }
-        else if (_debugHandLandMarks.DetectPalmLeft())
-        {
-            CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType.LeftSideAttack);
-        }
-    }
-
-    void CheckPlayerReaction(EnemyAttackSystem.EnemyAttackType expectedAttackType)
-    {
-        EnemyAttackSystem.EnemyAttackType actualAttackType = enemyAttackSystem.GetCurrentAttackType();
-
-        if (actualAttackType == expectedAttackType)
-        {
-            enemyAttackSystem.CorrectDefense();
-        }
-        else
-        {
-            Debug.Log("YOU DIE");
-        }
-    }
-
-}*/
-
 public class PlayerReaction : MonoBehaviour
 {
     private DebugHandLandMarks _debugHandLandMarks;
