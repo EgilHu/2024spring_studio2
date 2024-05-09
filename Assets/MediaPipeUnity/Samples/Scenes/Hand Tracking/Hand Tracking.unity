@@ -818,7 +818,7 @@ Transform:
   m_GameObject: {fileID: 449332162}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.125566, y: 23.098705, z: -0.4975595}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2117,11 +2117,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1907079100654025685, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -38.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1907079100654025685, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1907079100654025685, guid: 3f115d76c86266a4e89af42e9bdd3317, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2336,9 +2336,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debuginfo: {fileID: 138027318}
   _stiketimeinfo: {fileID: 1880466641}
-  velocity_threshold: 0.005
-  horizon_velocity_threshold: 0.01
-  horizon_left_velocity_threshold: -0.003
+  velocity_threshold: 0.006
+  horizon_velocity_threshold: 0.015
+  horizon_left_velocity_threshold: -0.01
   fist_threshold: 0.015
   palm_threshold: 0.01
   num_frames_to_avarage: 30
@@ -3343,6 +3343,10 @@ PrefabInstance:
     - target: {fileID: 380383856512286078, guid: 6537733b3d88a454ba90cb9eb22f930f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 380383856512286078, guid: 6537733b3d88a454ba90cb9eb22f930f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6987561951860397761, guid: 6537733b3d88a454ba90cb9eb22f930f, type: 3}
       propertyPath: m_Name
