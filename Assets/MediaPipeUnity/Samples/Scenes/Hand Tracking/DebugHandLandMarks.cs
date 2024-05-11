@@ -42,7 +42,7 @@ public class DebugHandLandMarks : MonoBehaviour
     
     public float fist_threshold = 0.01f;
     public float palm_threshold = 0.005f;
-    public int num_frames_to_avarage = 30;
+    public int num_frames_to_avarage = 20;
     
     private bool fist_detected = false;
 

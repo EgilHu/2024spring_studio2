@@ -36,18 +36,35 @@ public class PlayerReaction : MonoBehaviour
     public GameObject playerAttackVFX;
     public System.Collections.IEnumerator CounterAttack(EnemyAttackSystem.EnemyAttackType type)
     {
-        //bool perfectReaction = false;
-        
-        // KeyCode keyCode = GetCorrectReactionTypeForAttack(type);
-        // 检查玩家是否在此期间做出正确输入
         while (true)
         {
             if (GetCorrectReactionTypeForAttack(type))
             {
                 successfulReaction = true;
                 Debug.Log("Successful counterattack!");
-                audioManager.PlayAudio("punch");
+                //audioManager.PlayAudio("punch");
                 Instantiate(playerAttackVFX, Vector3.zero, Quaternion.identity);
+                switch (type)
+                {
+                    case EnemyAttackSystem.EnemyAttackType.LeftSideAttack :
+                        audioManager.PlayAudio("left");
+                        break;
+                    case EnemyAttackSystem.EnemyAttackType.RightSideAttack :
+                        audioManager.PlayAudio("right");
+                        break;
+                    case EnemyAttackSystem.EnemyAttackType.MiddleAttack :
+                        audioManager.PlayAudio("fist");
+                        break;
+                    case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack :
+                        audioManager.PlayAudio("palm");
+                        break;
+                    /*case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack :
+                        audioManager.PlayAudio("doublePalm");
+                        break;
+                    case EnemyAttackSystem.EnemyAttackType.UpSideAttack :
+                        audioManager.PlayAudio("up");
+                        break;*/
+                }
                 break;
             }
             successfulReaction = false;
@@ -59,27 +76,6 @@ public class PlayerReaction : MonoBehaviour
             Debug.Log("YOU DIE");
         } 
     }
-    
-    // private KeyCode GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
-    // {
-    //     switch (type)
-    //     {
-    //         case EnemyAttackSystem.EnemyAttackType.LeftSideAttack:
-    //             return KeyCode.Q;
-    //         case EnemyAttackSystem.EnemyAttackType.RightSideAttack:
-    //             return KeyCode.P;
-    //         case EnemyAttackSystem.EnemyAttackType.MiddleAttack:
-    //             return KeyCode.I;
-    //         case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack:
-    //             return KeyCode.Space;
-    //         case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack:
-    //             return KeyCode.B;
-    //         case EnemyAttackSystem.EnemyAttackType.UpSideAttack:
-    //             return KeyCode.O;
-    //         default:
-    //             return KeyCode.None;
-    //     }
-    // }
     
     private bool GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
     {
