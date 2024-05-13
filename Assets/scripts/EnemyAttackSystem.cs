@@ -4,6 +4,8 @@ using UnityEngine.Timeline;
 
 public class EnemyAttackSystem : MonoBehaviour
 {
+    public GameObject [] tutorialPrefabs;
+
     private PlayerReaction playerReaction;
 
     void Start()
@@ -29,7 +31,6 @@ public class EnemyAttackSystem : MonoBehaviour
         public GameObject prefab;
         public AnimationClip animation;
     }
-
     public EnemyAttackMove[] enemyAttackMoves; // 保存所有攻击招式的数组
 
     public IEnumerator SpawnEnemyAttack(EnemyAttackType type)
@@ -89,5 +90,63 @@ public class EnemyAttackSystem : MonoBehaviour
             Debug.LogError("PlayerReaction is not initialized");
         }
     }
+    
+    public IEnumerator SpawnTutorialAttack(EnemyAttackType type, int frameCount)
+    {
+        // 生成指定类型的敌人攻击
+        StartCoroutine(SpawnEnemyAttack(type));
+
+        // 等待指定的帧数
+        for (int i = 0; i < frameCount; i++)
+        {
+            yield return null;
+        }
+
+        // 暂停预制体的动画
+        Animator animator = enemyAttackMoves[(int)type].prefab.GetComponent<Animator>();
+        if (animator != null)
+        {
+            // 暂停动画
+            Time.timeScale = 0;
+            Debug.Log("Animator disabled");
+        }
+
+        // 等待玩家的回击
+        while (true)
+        {
+            if (playerReaction.GetCorrectReactionTypeForAttack(type))
+            {
+                // 玩家回击正确，恢复动画的播放
+                if (animator != null)
+                {
+                    // 恢复动画播放
+                    Time.timeScale = 1;
+                    Debug.Log("Animator enabled");
+                }
+
+                // 延迟1帧
+                yield return null;
+
+                // 结束当前协程
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
+    
+    public void SpawnTutorialPrefab(int index)
+    {
+        if (index >= 0 && index < tutorialPrefabs.Length)
+        {
+            GameObject prefab = Instantiate(tutorialPrefabs[index], tutorialPrefabs[index].transform.position, Quaternion.identity);
+            playerReaction.currentTutorialPrefab = prefab;
+        }
+        else
+        {
+            Debug.LogWarning("Tutorial prefab index out of range: " + index);
+        }
+    }
+    
 }
     

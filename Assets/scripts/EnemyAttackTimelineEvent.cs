@@ -3,6 +3,8 @@ using UnityEngine;
 public class EnemyAttackTimelineEvent : MonoBehaviour
 {
     private EnemyAttackSystem enemyAttackSystem;
+    private TimelineManager timelineManager;
+    private AudioManager audioManager;
 
     void Start()
     {
@@ -10,6 +12,18 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
         if (enemyAttackSystem == null)
         {
             Debug.LogError("EnemyAttackSystem not found");
+        }
+        
+        timelineManager = FindObjectOfType<TimelineManager>();
+        if (timelineManager == null)
+        {
+            Debug.LogError("TimelineManager not found");
+        }
+        
+        audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager == null)
+        {
+            Debug.LogError("AudioManager not found");
         }
     }
 
@@ -90,7 +104,8 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-    public EnemyAttackSystem.EnemyAttackType type;
+    /*public EnemyAttackSystem.EnemyAttackType type;*/
+    
     public void StopCounterAttack()
     {
         if (enemyAttackSystem != null)
@@ -100,6 +115,57 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
         else
         {
             Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    
+    public void SpawnTutorialMiddleAttack()
+    {
+        if (enemyAttackSystem != null)
+        {
+            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.MiddleAttack, 85));
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+
+    public void SpawnFistTutorialPrefab()
+    {
+        int index = 0;
+        if (enemyAttackSystem != null)
+        {
+            enemyAttackSystem.SpawnTutorialPrefab(index);
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+
+    public void PlayMainTimeline()
+    {
+        audioManager.StopAudio("tutorial part01");
+        //Debug.Log("tutorial part01 stopped");
+        if (timelineManager != null)
+        {
+            timelineManager.PlayTimeline("MainTimeline");
+        }
+        else
+        {
+            Debug.LogError("TimelineManager is not initialized");
+        }
+    }
+    
+    public void PlayAudio_tutorial_part01()
+    {
+        if (audioManager != null)
+        {
+            audioManager.PlayAudio("tutorial part01");
+        }
+        else
+        {
+            Debug.LogError("AudioManager is not initialized");
         }
     }
 }

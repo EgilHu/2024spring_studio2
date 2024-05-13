@@ -6,6 +6,8 @@ public class PlayerReaction : MonoBehaviour
 {
     private DebugHandLandMarks _debugHandLandMarks;
     private AudioManager audioManager;
+    
+    public GameObject currentTutorialPrefab;
     void Start()
     { 
         //enemyAttackSystem = FindObjectOfType<EnemyAttackSystem>();
@@ -44,6 +46,11 @@ public class PlayerReaction : MonoBehaviour
                 Debug.Log("Successful counterattack!");
                 //audioManager.PlayAudio("punch");
                 Instantiate(playerAttackVFX, Vector3.zero, Quaternion.identity);
+                if (currentTutorialPrefab != null)
+                {
+                    Destroy(currentTutorialPrefab);
+                    currentTutorialPrefab = null;
+                }
                 switch (type)
                 {
                     case EnemyAttackSystem.EnemyAttackType.LeftSideAttack :
@@ -54,6 +61,7 @@ public class PlayerReaction : MonoBehaviour
                         break;
                     case EnemyAttackSystem.EnemyAttackType.MiddleAttack :
                         audioManager.PlayAudio("fist");
+                        Debug.Log("Fist sound played!");
                         break;
                     case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack :
                         audioManager.PlayAudio("palm");
@@ -77,7 +85,7 @@ public class PlayerReaction : MonoBehaviour
         } 
     }
     
-    private bool GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
+    public bool GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
     {
         switch (type)
         {

@@ -28,4 +28,17 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Audio clip not found: " + audioName);
         }
     }
+    
+    public void StopAudio(string audioName)
+    {
+        if (audioClipDictionary.ContainsKey(audioName))
+        {
+            audioSource.clip = audioClipDictionary[audioName];
+            audioSource.Stop();
+        }
+        else
+        {
+            Debug.LogWarning("Audio clip not found: " + audioName);
+        }
+    }
 }
