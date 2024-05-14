@@ -176,6 +176,22 @@ MonoBehaviour:
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 7d5e74ee4f7bfad48922cd1de5e373a3, type: 2}
+--- !u!114 &-7026402522933790748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 45.6
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 7d5e74ee4f7bfad48922cd1de5e373a3, type: 2}
 --- !u!114 &-6615375919493701909
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -368,6 +384,22 @@ MonoBehaviour:
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 7d5e74ee4f7bfad48922cd1de5e373a3, type: 2}
+--- !u!114 &-5008966699754798424
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 46.18333333333333
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: ddb0502adb73f11408c80aed73518e7d, type: 2}
 --- !u!114 &-4815848829046678646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1045,7 +1077,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: Level 1
   - m_Version: 1
-    m_Start: 109.69999999999999
+    m_Start: 104.66666666666667
     m_ClipIn: 0
     m_Asset: {fileID: 1882139246342272080}
     m_Duration: 94.6666875
@@ -1057,25 +1089,7 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1286,7 +1300,8 @@ MonoBehaviour:
   m_Children: []
   m_Clips: []
   m_Markers:
-    m_Objects: []
+    m_Objects:
+    - {fileID: -7026402522933790748}
 --- !u!114 &3649146515261542410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1539,7 +1554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 86.90290006349485
+  m_Time: 90.11666666666666
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 7d5e74ee4f7bfad48922cd1de5e373a3, type: 2}
@@ -1754,6 +1769,7 @@ MonoBehaviour:
     - {fileID: 766995363976933991}
     - {fileID: 2574011434362166072}
     - {fileID: 5806501107792764584}
+    - {fileID: -5008966699754798424}
 --- !u!114 &9074002269896987869
 MonoBehaviour:
   m_ObjectHideFlags: 1

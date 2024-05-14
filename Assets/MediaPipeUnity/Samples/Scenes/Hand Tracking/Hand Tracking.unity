@@ -942,6 +942,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f99f0718da2678c4594ee1119f704fa9, type: 2}
     - {fileID: 11400000, guid: 3d4cf01641be9d6489c4f23178352ee9, type: 2}
     - {fileID: 11400000, guid: 72b572101de99ac489fbb988be03faba, type: 2}
+    - {fileID: 11400000, guid: d93683843479b9c4881c09d0ea9a98bb, type: 2}
+    - {fileID: 11400000, guid: ddb0502adb73f11408c80aed73518e7d, type: 2}
+    - {fileID: 11400000, guid: 180f083f90fbed04b98efac47c5c9e33, type: 2}
+    - {fileID: 11400000, guid: e061fdab3cc82b347a5dc2e39e718262, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -1088,6 +1092,62 @@ MonoBehaviour:
         - m_Target: {fileID: 449354389}
           m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
           m_MethodName: PlayAudio_tutorial_part01
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 449354389}
+          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
+          m_MethodName: SpawnTutorialSinglePalmAttack
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 449354389}
+          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
+          m_MethodName: PlayTutorialTimeline
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 449354389}
+          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
+          m_MethodName: SpawnTutorialLeftSideAttack
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 449354389}
+          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
+          m_MethodName: SpawnTutoriaRightSideAttack
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

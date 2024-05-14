@@ -143,13 +143,63 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
         }
     }
 
+    public void SpawnTutorialSinglePalmAttack()
+    {
+        if (enemyAttackSystem != null)
+        {
+            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttack, 95));
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    
+    public void SpawnTutorialLeftSideAttack()
+    {
+        if (enemyAttackSystem != null)
+        {
+            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.LeftSideAttack, 140));
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    
+    public void SpawnTutoriaRightSideAttack()
+    {
+        if (enemyAttackSystem != null)
+        {
+            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.RightSideAttack, 155));
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    
     public void PlayMainTimeline()
     {
         audioManager.StopAudio("tutorial part01");
-        //Debug.Log("tutorial part01 stopped");
+        timelineManager.PauseTimeline("TutorialTimeline");
         if (timelineManager != null)
         {
             timelineManager.PlayTimeline("MainTimeline");
+        }
+        else
+        {
+            Debug.LogError("TimelineManager is not initialized");
+        }
+    }
+    
+    public void PlayTutorialTimeline()
+    {
+        audioManager.PlayAudio("tutorial part01",1f);
+        timelineManager.PauseTimeline("MainTimeline");
+        if (timelineManager != null)
+        {
+            timelineManager.PlayTimeline("TutorialTimeline");
         }
         else
         {
