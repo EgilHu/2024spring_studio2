@@ -3,25 +3,41 @@ using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioSource audioSource;
-    public AudioClip[] audioClips;
-    private Dictionary<string, AudioClip> audioClipDictionary;
+    public AudioSource musicSource;
+    public AudioSource sfxSource;
+    public AudioClip[] musicClips;
+    public AudioClip[] sfxClips;
+    private Dictionary<string, AudioClip> musicClipDictionary;
+    private Dictionary<string, AudioClip> sfxClipDictionary;
     
     void Start()
     {
-        audioClipDictionary = new Dictionary<string, AudioClip>();
-        foreach (AudioClip audioClip in audioClips)
+        musicClipDictionary = new Dictionary<string, AudioClip>();
+        foreach (AudioClip audioClip in musicClips)
         {
-            audioClipDictionary.Add(audioClip.name, audioClip);
+            musicClipDictionary.Add(audioClip.name, audioClip);
+        }
+
+        sfxClipDictionary = new Dictionary<string, AudioClip>();
+        foreach (AudioClip audioClip in sfxClips)
+        {
+            sfxClipDictionary.Add(audioClip.name, audioClip);
         }
     }
     
-    public void PlayAudio(string audioName)
+    public void PlayAudio(string audioName,float volume)
     {
-        if (audioClipDictionary.ContainsKey(audioName))
+        if (musicClipDictionary.ContainsKey(audioName))
         {
-            audioSource.clip = audioClipDictionary[audioName];
-            audioSource.Play();
+            musicSource.clip = musicClipDictionary[audioName];
+            musicSource.volume = volume;
+            musicSource.Play();
+        }
+        else if (sfxClipDictionary.ContainsKey(audioName))
+        {
+            sfxSource.clip = sfxClipDictionary[audioName];
+            sfxSource.volume = volume;
+            sfxSource.Play();
         }
         else
         {
@@ -31,10 +47,15 @@ public class AudioManager : MonoBehaviour
     
     public void StopAudio(string audioName)
     {
-        if (audioClipDictionary.ContainsKey(audioName))
+        if (musicClipDictionary.ContainsKey(audioName))
         {
-            audioSource.clip = audioClipDictionary[audioName];
-            audioSource.Stop();
+            musicSource.clip = musicClipDictionary[audioName];
+            musicSource.Stop();
+        }
+        else if (sfxClipDictionary.ContainsKey(audioName))
+        {
+            sfxSource.clip = sfxClipDictionary[audioName];
+            sfxSource.Stop();
         }
         else
         {

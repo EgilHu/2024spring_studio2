@@ -5,14 +5,15 @@ using UnityEngine;
 public class PlayerReaction : MonoBehaviour
 {
     private DebugHandLandMarks _debugHandLandMarks;
-    private AudioManager audioManager;
+    [SerializeField] private AudioManager audioManager;
     
     public GameObject currentTutorialPrefab;
     void Start()
     { 
         //enemyAttackSystem = FindObjectOfType<EnemyAttackSystem>();
         _debugHandLandMarks = FindObjectOfType<DebugHandLandMarks>();
-        audioManager = FindObjectOfType<AudioManager>();
+        /*audioManager = FindObjectOfType<AudioManager>();*/
+
     }
     
     public Coroutine counterAttackCoroutine;
@@ -54,17 +55,17 @@ public class PlayerReaction : MonoBehaviour
                 switch (type)
                 {
                     case EnemyAttackSystem.EnemyAttackType.LeftSideAttack :
-                        audioManager.PlayAudio("left");
+                        audioManager.PlayAudio("left", 0.5f);
                         break;
                     case EnemyAttackSystem.EnemyAttackType.RightSideAttack :
-                        audioManager.PlayAudio("right");
+                        audioManager.PlayAudio("right",0.5f);
                         break;
                     case EnemyAttackSystem.EnemyAttackType.MiddleAttack :
-                        audioManager.PlayAudio("fist");
+                        audioManager.PlayAudio("fist",0.5f);
                         Debug.Log("Fist sound played!");
                         break;
                     case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack :
-                        audioManager.PlayAudio("palm");
+                        audioManager.PlayAudio("palm",0.5f);
                         break;
                     /*case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack :
                         audioManager.PlayAudio("doublePalm");

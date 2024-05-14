@@ -161,7 +161,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (audioManager != null)
         {
-            audioManager.PlayAudio("tutorial part01");
+            audioManager.PlayAudio("tutorial part01",1f);
         }
         else
         {
