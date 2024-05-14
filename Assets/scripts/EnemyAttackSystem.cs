@@ -39,7 +39,7 @@ public class EnemyAttackSystem : MonoBehaviour
         EnemyAttackMove move = System.Array.Find(enemyAttackMoves, x => x.type == type);
         if (move != null)
         {
-            GameObject attackObject = Instantiate(move.prefab, transform.position, Quaternion.identity);
+            GameObject attackObject = Instantiate(move.prefab, move.prefab.transform.position, move.prefab.transform.rotation);
             Renderer renderer = attackObject.GetComponent<Renderer>();
             if (renderer != null)
             {
