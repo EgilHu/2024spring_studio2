@@ -159,7 +159,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.LeftSideAttack, 140));
+            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.LeftSideAttack, 160));
         }
         else
         {

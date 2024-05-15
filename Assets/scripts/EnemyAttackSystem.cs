@@ -7,10 +7,13 @@ public class EnemyAttackSystem : MonoBehaviour
     public GameObject [] tutorialPrefabs;
 
     private PlayerReaction playerReaction;
+    
+    private ScreenDamage _screenDamage;
 
     void Start()
     {
         playerReaction = FindObjectOfType<PlayerReaction>();
+        _screenDamage = FindObjectOfType<ScreenDamage>();
     }
 
     public enum EnemyAttackType
@@ -81,6 +84,7 @@ public class EnemyAttackSystem : MonoBehaviour
             if (!playerReaction.successfulReaction)
             {
                 Debug.Log("YOU DIE");
+                _screenDamage.CurrentHealth -= 10f; 
             }
             StopCoroutine(playerReaction.counterAttackCoroutine);
 
@@ -108,7 +112,7 @@ public class EnemyAttackSystem : MonoBehaviour
         {
             // 暂停动画
             Time.timeScale = 0;
-            Debug.Log("Animator disabled");
+            //Debug.Log("Animator disabled");
         }
 
         // 等待玩家的回击
@@ -121,7 +125,7 @@ public class EnemyAttackSystem : MonoBehaviour
                 {
                     // 恢复动画播放
                     Time.timeScale = 1;
-                    Debug.Log("Animator enabled");
+                    /*Debug.Log("Animator enabled");*/
                 }
 
                 // 延迟1帧
