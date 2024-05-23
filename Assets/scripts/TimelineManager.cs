@@ -1,57 +1,57 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 
 public class TimelineManager : MonoBehaviour
 {
-    public Dictionary<string, PlayableDirector> playableDirectors = new Dictionary<string, PlayableDirector>();
-    
-    void Start()
-    {
-        // 获取PlayableDirector组件
-        PlayableDirector mainTimelineDirector = GameObject.Find("MainTimeline").GetComponent<PlayableDirector>();
-        PlayableDirector tutorialTimelineDirector = GameObject.Find("TutorialTimeline").GetComponent<PlayableDirector>();
+    // 用于手动添加Timeline游戏物体的列表
+    public List<PlayableDirector> timelineDirectors = new List<PlayableDirector>();
 
-        // 添加Timeline
-        AddTimeline("MainTimeline", mainTimelineDirector);
-        AddTimeline("TutorialTimeline", tutorialTimelineDirector);
-    }
-    
-    public void AddTimeline(string name, PlayableDirector playableDirector)
+    // 在Inspector窗口中显示添加按钮
+    [ContextMenu("Add Timeline")]
+    void AddTimelineManually()
     {
-        if (!playableDirectors.ContainsKey(name))
+        // 添加当前选择的游戏物体上的PlayableDirector组件
+        PlayableDirector director = GetComponent<PlayableDirector>();
+        if (director != null && !timelineDirectors.Contains(director))
         {
-            playableDirectors.Add(name, playableDirector);
-        }
-        else
-        {
-            Debug.LogError("A timeline with the same name already exists.");
+            timelineDirectors.Add(director);
         }
     }
 
-    public void PlayTimeline(string name)
+    public void PlayTimeline(int index)
     {
-        if (playableDirectors.ContainsKey(name))
+        if (index >= 0 && index < timelineDirectors.Count)
         {
-            playableDirectors[name].Play();
+            timelineDirectors[index].Play();
         }
         else
         {
-            Debug.LogError("No timeline found with the given name.");
+            Debug.LogError("Invalid timeline index.");
         }
     }
 
-    public void PauseTimeline(string name)
+    public void PauseTimeline(int index)
     {
-        if (playableDirectors.ContainsKey(name))
+        if (index >= 0 && index < timelineDirectors.Count)
         {
-            playableDirectors[name].Pause();
+            timelineDirectors[index].Pause();
         }
         else
         {
-            Debug.LogError("No timeline found with the given name.");
+            Debug.LogError("Invalid timeline index.");
+        }
+    }
+
+    public void StopTimeline(int index)
+    {
+        if (index >= 0 && index < timelineDirectors.Count)
+        {
+            timelineDirectors[index].Stop();
+        }
+        else
+        {
+            Debug.LogError("Invalid timeline index.");
         }
     }
 }

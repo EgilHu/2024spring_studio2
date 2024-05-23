@@ -84,7 +84,7 @@ public class EnemyAttackSystem : MonoBehaviour
             if (!playerReaction.successfulReaction)
             {
                 Debug.Log("YOU DIE");
-                _healthSystem.currentHealth -= 1;
+                _healthSystem.TakeDamage(1);
                 _screenDamage.CurrentHealth -= 1f; 
                 Debug.Log("Health has been updated: " + _healthSystem.currentHealth);
             }

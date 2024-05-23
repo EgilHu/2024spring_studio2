@@ -182,10 +182,10 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     public void PlayMainTimeline()
     {
         audioManager.StopAudio("tutorial part01");
-        timelineManager.PauseTimeline("TutorialTimeline");
+        timelineManager.PauseTimeline(1);
         if (timelineManager != null)
         {
-            timelineManager.PlayTimeline("MainTimeline");
+            timelineManager.PlayTimeline(0);
         }
         else
         {
@@ -196,10 +196,10 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     public void PlayTutorialTimeline()
     {
         audioManager.PlayAudio("tutorial part01",1f);
-        timelineManager.PauseTimeline("MainTimeline");
+        timelineManager.PauseTimeline(0);
         if (timelineManager != null)
         {
-            timelineManager.PlayTimeline("TutorialTimeline");
+            timelineManager.PlayTimeline(1);
         }
         else
         {
