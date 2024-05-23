@@ -67,12 +67,12 @@ public class PlayerReaction : MonoBehaviour
                     case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack :
                         audioManager.PlayAudio("palm",0.5f);
                         break;
-                    /*case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack :
-                        audioManager.PlayAudio("doublePalm");
+                    case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack :
+                        //audioManager.PlayAudio("doublePalm");
                         break;
                     case EnemyAttackSystem.EnemyAttackType.UpSideAttack :
-                        audioManager.PlayAudio("up");
-                        break;*/
+                        //audioManager.PlayAudio("up");
+                        break;
                 }
                 break;
             }

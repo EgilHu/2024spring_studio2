@@ -86,7 +86,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (enemyAttackSystem != null)
         {
-            enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.DoublePalmAttack);
+            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.DoublePalmAttack));
         }
         else
         {
@@ -97,7 +97,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (enemyAttackSystem != null)
         {
-            enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttack);
+            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttack));
         }
         else
         {
