@@ -589,7 +589,7 @@ public class DebugHandLandMarks : MonoBehaviour
     
     public bool DetectSinglePalmAttack()
     {
-        return palm_detected && (_palmState == PalmState.Up) && forwarding_detected && !double_forwarding_detected;
+        return palm_detected && (_palmState == PalmState.Up) && forwarding_detected /*&& !double_forwarding_detected*/;
     }
     
     public bool DetectDoublePalmAttack()
@@ -599,7 +599,7 @@ public class DebugHandLandMarks : MonoBehaviour
 
     public bool DetectPalmDownAttack()
     {
-        return palm_detected && (_palmState == PalmState.Down) && forwarding_detected && !double_forwarding_detected;
+        return palm_detected && (_palmState == PalmState.Down) && forwarding_detected /*&& !double_forwarding_detected*/;
     }
 
     public bool DetectPalmRight()

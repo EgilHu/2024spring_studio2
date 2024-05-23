@@ -5,15 +5,14 @@ using UnityEngine;
 public class PlayerReaction : MonoBehaviour
 {
     private DebugHandLandMarks _debugHandLandMarks;
+    //private HealthSystem _healthSystem;
     [SerializeField] private AudioManager audioManager;
     
     public GameObject currentTutorialPrefab;
     void Start()
     { 
-        //enemyAttackSystem = FindObjectOfType<EnemyAttackSystem>();
         _debugHandLandMarks = FindObjectOfType<DebugHandLandMarks>();
-        /*audioManager = FindObjectOfType<AudioManager>();*/
-
+        //_healthSystem = FindObjectOfType<HealthSystem>();
     }
     
     public Coroutine counterAttackCoroutine;
@@ -45,7 +44,6 @@ public class PlayerReaction : MonoBehaviour
             {
                 successfulReaction = true;
                 Debug.Log("Successful counterattack!");
-                //audioManager.PlayAudio("punch");
                 Instantiate(playerAttackVFX, Vector3.zero, Quaternion.identity);
                 if (currentTutorialPrefab != null)
                 {
@@ -80,10 +78,12 @@ public class PlayerReaction : MonoBehaviour
             yield return null;
         }
         
-        if (!successfulReaction)
+        /*if (!successfulReaction)
         {
             Debug.Log("YOU DIE");
-        } 
+            _healthSystem.TakeDamage(1);
+            Debug.Log("Health has been updated: " + _healthSystem.currentHealth);
+        } */
     }
     
     public bool GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)

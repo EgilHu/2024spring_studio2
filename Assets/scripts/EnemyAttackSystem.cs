@@ -7,13 +7,14 @@ public class EnemyAttackSystem : MonoBehaviour
     public GameObject [] tutorialPrefabs;
 
     private PlayerReaction playerReaction;
-    
+    private HealthSystem _healthSystem;
     private ScreenDamage _screenDamage;
 
     void Start()
     {
         playerReaction = FindObjectOfType<PlayerReaction>();
         _screenDamage = FindObjectOfType<ScreenDamage>();
+        _healthSystem = FindObjectOfType<HealthSystem>();
     }
 
     public enum EnemyAttackType
@@ -80,14 +81,14 @@ public class EnemyAttackSystem : MonoBehaviour
     {
         if (playerReaction != null)
         {
-
             if (!playerReaction.successfulReaction)
             {
                 Debug.Log("YOU DIE");
-                _screenDamage.CurrentHealth -= 10f; 
+                _healthSystem.currentHealth -= 1;
+                _screenDamage.CurrentHealth -= 1f; 
+                Debug.Log("Health has been updated: " + _healthSystem.currentHealth);
             }
             StopCoroutine(playerReaction.counterAttackCoroutine);
-
         }
         else
         {
