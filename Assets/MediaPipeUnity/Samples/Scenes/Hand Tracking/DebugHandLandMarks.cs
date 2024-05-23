@@ -38,11 +38,12 @@ public class DebugHandLandMarks : MonoBehaviour
     
     public float velocity_threshold = 0.1f;
     public float horizon_velocity_threshold = 0.1f;
-    public float horizon_left_velocity_threshold = -0.1f;
     
     public float fist_threshold = 0.01f;
     public float palm_threshold = 0.005f;
-    public int num_frames_to_avarage = 20;
+    public int num_frames_to_avarage = 30;
+
+    private bool grab_detected = false;
     
     private bool fist_detected = false;
 
@@ -119,6 +120,10 @@ public class DebugHandLandMarks : MonoBehaviour
         {
             _debuginfo.text = "Forwarding";
         }
+        else if (grab_detected)
+        {
+            _debuginfo.text = "Grab";
+        }
         else
         {
             _debuginfo.text = "";
@@ -149,7 +154,7 @@ public class DebugHandLandMarks : MonoBehaviour
         }
     }
 
-    float GetTIPMCPDistance(Landmark mcp, Landmark tip)
+    float GetFingerPosDistance(Landmark mcp, Landmark tip)
     {
         Vector3 tip_pos = new Vector3(tip.X, tip.Y, tip.Z);
         Vector3 mcp_pos = new Vector3(mcp.X, mcp.Y, mcp.Z);
@@ -167,50 +172,102 @@ public class DebugHandLandMarks : MonoBehaviour
         return Vector3.Distance(mcp_pos, pip_pos) + Vector3.Distance(pip_pos, dip_pos) +
                Vector3.Distance(dip_pos, tip_pos);
     }
-
+    
+    
     bool DetectFist(RepeatedField<Landmark> landmark)
     {
         bool detect_index = false;
         bool detect_middle = false;
         bool detect_ring = false;
         bool detect_pinky = false;
-        // // thumb
-        // if (GetTIPMCPDistance(landmark[1], landmark[4]) -
-        //     GetWholefingerLength(landmark[1], landmark[2], landmark[3], landmark[4])> fist_threshold)
-        // {
-        //     detect_thumb = true;
-        // }
-        //
-        // index
-        // Debug.Log(GetWholefingerLength(landmark[5], landmark[6], landmark[7], landmark[8]) -
-        //           GetTIPMCPDistance(landmark[5], landmark[8]));
+        
+        Vector3 index_mcp_pos = new Vector3(landmark[5].X, landmark[5].Y,
+            landmark[5].Z);
+        Vector3 wrist_pos = new Vector3(landmark[0].X, landmark[0].Y,
+            landmark[0].Z);
+        float bone_length = Vector3.Distance(index_mcp_pos, wrist_pos);
+        
+        
         if (GetWholefingerLength(landmark[5], landmark[6], landmark[7], landmark[8]) -
-            GetTIPMCPDistance(landmark[5], landmark[8])> fist_threshold)
+            GetFingerPosDistance(landmark[5], landmark[8])> fist_threshold && GetFingerPosDistance(landmark[8], 
+                landmark[0]) < bone_length)
         {
             detect_index = true;
         }
         
         // middle
         if (GetWholefingerLength(landmark[9], landmark[10], landmark[11], landmark[12]) -
-            GetTIPMCPDistance(landmark[9], landmark[12]) > fist_threshold)
+            GetFingerPosDistance(landmark[9], landmark[12]) > fist_threshold && GetFingerPosDistance(landmark[12], 
+                landmark[0]) < bone_length)
         {
             detect_middle = true;
         }
         
         //ring
         if (GetWholefingerLength(landmark[13], landmark[14], landmark[15], landmark[16]) - 
-            GetTIPMCPDistance(landmark[13], landmark[16]) > fist_threshold)
+            GetFingerPosDistance(landmark[13], landmark[16]) > fist_threshold && GetFingerPosDistance(landmark[16], 
+                landmark[0]) < bone_length)
         {
             detect_ring = true;
         }
         
         //pinky
         if (GetWholefingerLength(landmark[17], landmark[18], landmark[19], landmark[20]) -
-            GetTIPMCPDistance(landmark[17], landmark[20]) > fist_threshold)
+            GetFingerPosDistance(landmark[17], landmark[20]) > fist_threshold && GetFingerPosDistance(landmark[20], 
+                landmark[0]) < bone_length)
         {
             detect_pinky = true;
         }
-
+            
+        return detect_index && detect_middle && detect_ring && detect_pinky;
+    }
+    
+    
+    bool DetectGrab(RepeatedField<Landmark> landmark)
+    {
+        bool detect_index = false;
+        bool detect_middle = false;
+        bool detect_ring = false;
+        bool detect_pinky = false;
+        
+        Vector3 index_mcp_pos = new Vector3(landmark[5].X, landmark[5].Y,
+            landmark[5].Z);
+        Vector3 wrist_pos = new Vector3(landmark[0].X, landmark[0].Y,
+            landmark[0].Z);
+        float bone_length = Vector3.Distance(index_mcp_pos, wrist_pos);
+        
+        
+        if (GetWholefingerLength(landmark[5], landmark[6], landmark[7], landmark[8]) -
+            GetFingerPosDistance(landmark[5], landmark[8])> fist_threshold && GetFingerPosDistance(landmark[8], 
+                landmark[0]) > bone_length)
+        {
+            detect_index = true;
+        }
+        
+        // middle
+        if (GetWholefingerLength(landmark[9], landmark[10], landmark[11], landmark[12]) -
+            GetFingerPosDistance(landmark[9], landmark[12]) > fist_threshold && GetFingerPosDistance(landmark[12], 
+                landmark[0]) > bone_length)
+        {
+            detect_middle = true;
+        }
+        
+        //ring
+        if (GetWholefingerLength(landmark[13], landmark[14], landmark[15], landmark[16]) - 
+            GetFingerPosDistance(landmark[13], landmark[16]) > fist_threshold && GetFingerPosDistance(landmark[16], 
+                landmark[0]) > bone_length)
+        {
+            detect_ring = true;
+        }
+        
+        //pinky
+        if (GetWholefingerLength(landmark[17], landmark[18], landmark[19], landmark[20]) -
+            GetFingerPosDistance(landmark[17], landmark[20]) > fist_threshold && GetFingerPosDistance(landmark[20], 
+                landmark[0]) > bone_length)
+        {
+            detect_pinky = true;
+        }
+            
         return detect_index && detect_middle && detect_ring && detect_pinky;
     }
 
@@ -232,6 +289,14 @@ public class DebugHandLandMarks : MonoBehaviour
         return DetectFist(landmark);
     }
 
+    
+    bool DetectGrab(IReadOnlyList<LandmarkList> _landmarkList)
+    {
+        RepeatedField<Landmark> landmark = _landmarkList[0].Landmark;
+        // bool detect_thumb = false;
+        return DetectGrab(landmark);
+    }
+    
     bool DetectPalm(RepeatedField<Landmark> landmark)
     {
         bool detect_thumb = false;
@@ -240,7 +305,7 @@ public class DebugHandLandMarks : MonoBehaviour
         bool detect_ring = false;
         bool detect_pinky = false;
         // thumb
-        if (GetTIPMCPDistance(landmark[1], landmark[4]) -
+        if (GetFingerPosDistance(landmark[1], landmark[4]) -
             GetWholefingerLength(landmark[1], landmark[2], landmark[3], landmark[4])< palm_threshold)
         {
             detect_thumb = true;
@@ -248,28 +313,28 @@ public class DebugHandLandMarks : MonoBehaviour
         
         // index
         if (GetWholefingerLength(landmark[5], landmark[6], landmark[7], landmark[8]) -
-            GetTIPMCPDistance(landmark[5], landmark[8])< palm_threshold)
+            GetFingerPosDistance(landmark[5], landmark[8])< palm_threshold)
         {
             detect_index = true;
         }
         
         // middle
         if (GetWholefingerLength(landmark[9], landmark[10], landmark[11], landmark[12]) -
-            GetTIPMCPDistance(landmark[9], landmark[12]) < palm_threshold)
+            GetFingerPosDistance(landmark[9], landmark[12]) < palm_threshold)
         {
             detect_middle = true;
         }
         
         //ring
         if (GetWholefingerLength(landmark[13], landmark[14], landmark[15], landmark[16]) - 
-            GetTIPMCPDistance(landmark[13], landmark[16]) < palm_threshold)
+            GetFingerPosDistance(landmark[13], landmark[16]) < palm_threshold)
         {
             detect_ring = true;
         }
         
         //pinky
         if (GetWholefingerLength(landmark[17], landmark[18], landmark[19], landmark[20]) -
-            GetTIPMCPDistance(landmark[17], landmark[20]) < palm_threshold)
+            GetFingerPosDistance(landmark[17], landmark[20]) < palm_threshold)
         {
             detect_pinky = true;
         }
@@ -345,6 +410,15 @@ public class DebugHandLandMarks : MonoBehaviour
             {
                 double_fist_detected = false;
             }
+
+            if (DetectGrab(_landmarkList))
+            {
+                grab_detected = true;
+            }
+            else
+            {
+                grab_detected = false;
+            }
         }
 
     }
@@ -366,31 +440,28 @@ public class DebugHandLandMarks : MonoBehaviour
         {
             // single_hand_speed
             float hand_speed = 0.0f;
-            float leftHand_speed = 0.0f;
             if (_landmarkList.Count < 2)
             {
-                Vector3 wrist_pos = new Vector3(_landmarkList[0].Landmark[12].X, _landmarkList[0].Landmark[12].Y,
-                    _landmarkList[0].Landmark[12].Z);
+                Vector3 wrist_pos = new Vector3(_landmarkList[0].Landmark[0].X, _landmarkList[0].Landmark[0].Y,
+                    _landmarkList[0].Landmark[0].Z);
                 hand_speed = wrist_pos.x - previous_wrist_pos.x;
                 previous_wrist_pos = wrist_pos;
             }
             else
             {
-                Vector3 left_wrist_pos = new Vector3(_landmarkList[0].Landmark[12].X, _landmarkList[0].Landmark[12].Y,
-                    _landmarkList[0].Landmark[12].Z);
-                Vector3 right_wrist_pos = new Vector3(_landmarkList[1].Landmark[12].X, _landmarkList[1].Landmark[12].Y,
-                    _landmarkList[1].Landmark[12].Z);
+                Vector3 left_wrist_pos = new Vector3(_landmarkList[0].Landmark[0].X, _landmarkList[0].Landmark[0].Y,
+                    _landmarkList[0].Landmark[0].Z);
+                Vector3 right_wrist_pos = new Vector3(_landmarkList[1].Landmark[0].X, _landmarkList[1].Landmark[0].Y,
+                    _landmarkList[1].Landmark[0].Z);
                 float left_hand_speed = left_wrist_pos.x - previous_wrist_pos1.x;
                 float right_hand_speed = right_wrist_pos.x - previous_wrist_pos2.x;
                 hand_speed = Mathf.Max(left_hand_speed, right_hand_speed);
-                leftHand_speed= Mathf.Min(left_hand_speed, right_hand_speed);
                 previous_wrist_pos1 = left_wrist_pos;
                 previous_wrist_pos2 = right_wrist_pos;
                 left_hand_horizon_speed_queue.Enqueue(left_hand_speed);
                 right_hand_horizon_speed_queue.Enqueue(right_hand_speed);
             }
             single_hand_horizon_speed_queue.Enqueue(hand_speed);
-            left_hand_horizon_speed_queue.Enqueue(leftHand_speed);
             
             if (single_hand_horizon_speed_queue.Count > num_frames_to_avarage)
             {
@@ -399,7 +470,7 @@ public class DebugHandLandMarks : MonoBehaviour
                     _horizonState = HorizonState.Right;
                     horizon_enqueue_stopped = true;
                 }
-                else if (CalculateHandAveragevelocity(left_hand_horizon_speed_queue) < horizon_left_velocity_threshold)
+                else if (CalculateHandAveragevelocity(single_hand_horizon_speed_queue) < -horizon_velocity_threshold)
                 {
                     _horizonState = HorizonState.Left;
                     horizon_enqueue_stopped = true;
