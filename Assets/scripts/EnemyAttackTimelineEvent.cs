@@ -26,18 +26,8 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("AudioManager not found");
         }
     }
-
-    /*public void Initialize(EnemyAttackSystem system)
-    {
-        enemyAttackSystem = system;
-    }
-
-    public void DestroyPrefab()
-    {
-        enemyAttackSystem.DestroyPrefab(gameObject);
-    }*/
-
-    public void SpawnLeftSideAttack()
+    
+    /*public void SpawnLeftSideAttack()
     {
         if (enemyAttackSystem != null)
         {
@@ -58,12 +48,12 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
         {
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
-    }
-    public void SpawnMiddleAttack()
+    }*/
+    public void SpawnMiddleAttack(float speed)
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.MiddleAttack));
+            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.MiddleAttack, speed));
         }
         else
         {
@@ -71,33 +61,34 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
         }
     }
 
-    public void SpawnSinglePalmAttack()
+    public void SpawnSinglePalmAttack(float speed)
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttack));
+            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttack, speed));
         }
         else
         {
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-    public void SpawnDoublePalmAttack()
+    
+    public void SpawnDoublePalmAttack(float speed)
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.DoublePalmAttack));
+            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.DoublePalmAttack,speed));
         }
         else
         {
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-    public void SpawnUpSideAttack()
+    public void SpawnUpSideAttack(float speed)
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttack));
+            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttack,speed));
         }
         else
         {

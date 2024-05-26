@@ -37,7 +37,7 @@ public class EnemyAttackSystem : MonoBehaviour
     }
     public EnemyAttackMove[] enemyAttackMoves; // 保存所有攻击招式的数组
 
-    public IEnumerator SpawnEnemyAttack(EnemyAttackType type)
+    public IEnumerator SpawnEnemyAttack(EnemyAttackType type, float speed)
     {
         // 寻找对应类型的攻击招式
         EnemyAttackMove move = System.Array.Find(enemyAttackMoves, x => x.type == type);
@@ -63,6 +63,7 @@ public class EnemyAttackSystem : MonoBehaviour
             if (animator != null)
             {
                 animator.enabled = true; // 开始播放动画
+                animator.speed = speed;
             }
             playerReaction.ReactToSignal(type);
         }
@@ -99,7 +100,7 @@ public class EnemyAttackSystem : MonoBehaviour
     public IEnumerator SpawnTutorialAttack(EnemyAttackType type, int frameCount)
     {
         // 生成指定类型的敌人攻击
-        StartCoroutine(SpawnEnemyAttack(type));
+        StartCoroutine(SpawnEnemyAttack(type, 1.0f));
 
         // 等待指定的帧数
         for (int i = 0; i < frameCount; i++)

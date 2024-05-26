@@ -931,8 +931,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Events:
     m_Signals:
-    - {fileID: 11400000, guid: d3a0e1bfe5c75b445a0c152012eb43a6, type: 2}
-    - {fileID: 11400000, guid: e5428cfb1a91e0f43983293f3e7a4722, type: 2}
     - {fileID: 11400000, guid: 0e494803ca92936498d1435eb4c3f4b9, type: 2}
     - {fileID: 11400000, guid: cc0623c0408595f4c89678ace6da1ce9, type: 2}
     - {fileID: 11400000, guid: 8db29dee5056882479c95a8cf3e5bb62, type: 2}
@@ -946,46 +944,21 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ddb0502adb73f11408c80aed73518e7d, type: 2}
     - {fileID: 11400000, guid: 180f083f90fbed04b98efac47c5c9e33, type: 2}
     - {fileID: 11400000, guid: e061fdab3cc82b347a5dc2e39e718262, type: 2}
+    - {fileID: 11400000, guid: a4baf13722102a2408b58e2b4a4a9e97, type: 2}
+    - {fileID: 11400000, guid: e75bcb2fd566ac5479d870294ce96ceb, type: 2}
+    - {fileID: 11400000, guid: 66f6a5a3ef3894d41bf84119d9766c65, type: 2}
     m_Events:
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 449354389}
-          m_TargetAssemblyTypeName: AttackAnimationEvent, Assembly-CSharp
-          m_MethodName: SpawnLeftSideAttack
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 449354389}
-          m_TargetAssemblyTypeName: AttackAnimationEvent, Assembly-CSharp
-          m_MethodName: SpawnRightSideAttack
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 449354389}
           m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
           m_MethodName: SpawnMiddleAttack
-          m_Mode: 1
+          m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 1
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -994,12 +967,12 @@ MonoBehaviour:
         - m_Target: {fileID: 449354389}
           m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
           m_MethodName: SpawnUpSideAttack
-          m_Mode: 1
+          m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 1
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -1008,12 +981,12 @@ MonoBehaviour:
         - m_Target: {fileID: 449354389}
           m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
           m_MethodName: SpawnSinglePalmAttack
-          m_Mode: 1
+          m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 1
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -1022,12 +995,12 @@ MonoBehaviour:
         - m_Target: {fileID: 449354389}
           m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
           m_MethodName: SpawnDoublePalmAttack
-          m_Mode: 1
+          m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 1
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -1154,6 +1127,48 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 449354389}
+          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
+          m_MethodName: SpawnUpSideAttack
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1.25
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 449354389}
+          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
+          m_MethodName: SpawnMiddleAttack
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1.5
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 449354389}
+          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
+          m_MethodName: SpawnDoublePalmAttack
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1.5
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -2126,7 +2141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b434259596c994ab78f6753c3df5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 10
   currentHealth: 0
 --- !u!4 &960989903
 Transform:
@@ -2824,7 +2839,7 @@ MonoBehaviour:
   horizon_velocity_threshold: 0.0275
   fist_threshold: 0.015
   palm_threshold: 0.01
-  num_frames_to_avarage: 10
+  num_frames_to_avarage: 8
   enqueue_stop_time: 0.025
 --- !u!4 &1214262177
 Transform:
