@@ -23,8 +23,12 @@ public class EnemyAttackSystem : MonoBehaviour
         RightSideAttack,
         MiddleAttack,
         SinglePalmAttack,
+        SinglePalmAttackLeft,
+        SinglePalmAttackRight,
         DoublePalmAttack,
         UpSideAttack,
+        UpSideAttackLeft,
+        UpSideAttackRight,
     }
 
     /*招式类*/
@@ -33,7 +37,7 @@ public class EnemyAttackSystem : MonoBehaviour
     {
         public EnemyAttackType type; // 攻击类型
         public GameObject prefab;
-        public AnimationClip animation;
+        //public AnimationClip animation;
     }
     public EnemyAttackMove[] enemyAttackMoves; // 保存所有攻击招式的数组
 

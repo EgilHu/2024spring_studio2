@@ -60,7 +60,6 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-
     public void SpawnSinglePalmAttack(float speed)
     {
         if (enemyAttackSystem != null)
@@ -72,7 +71,28 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-    
+    public void SpawnLeftSinglePalmAttack(float speed)
+    {
+        if (enemyAttackSystem != null)
+        {
+            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttackLeft, speed));
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    public void SpawnRightSinglePalmAttack(float speed)
+    {
+        if (enemyAttackSystem != null)
+        {
+            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttackRight, speed));
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
     public void SpawnDoublePalmAttack(float speed)
     {
         if (enemyAttackSystem != null)
@@ -95,8 +115,28 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-    /*public EnemyAttackSystem.EnemyAttackType type;*/
-    
+    public void SpawnUpSideAttackLeft(float speed)
+    {
+        if (enemyAttackSystem != null)
+        {
+            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttackLeft,speed));
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    public void SpawnUpSideAttackRight(float speed)
+    {
+        if (enemyAttackSystem != null)
+        {
+            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttackRight,speed));
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
     public void StopCounterAttack()
     {
         if (enemyAttackSystem != null)

@@ -30,6 +30,7 @@ public class HealthSystem : MonoBehaviour
     void Die()
     {
         Debug.Log("Entity died.");
+        
         _timelineManager.StopTimeline(0);
     }
 }

@@ -24,8 +24,12 @@ public class PlayerReaction : MonoBehaviour
             case EnemyAttackSystem.EnemyAttackType.RightSideAttack :
             case EnemyAttackSystem.EnemyAttackType.MiddleAttack :
             case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack :
+            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackLeft :
+            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackRight :
             case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack :
             case EnemyAttackSystem.EnemyAttackType.UpSideAttack :
+            case EnemyAttackSystem.EnemyAttackType.UpSideAttackLeft :
+            case EnemyAttackSystem.EnemyAttackType.UpSideAttackRight :
                 counterAttackCoroutine = StartCoroutine(CounterAttack(type));
                 break;
             default:
@@ -65,11 +69,21 @@ public class PlayerReaction : MonoBehaviour
                     case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack :
                         audioManager.PlayAudio("palm",0.5f);
                         break;
+                    case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackLeft :
+                        audioManager.PlayAudio("palm",0.5f);
+                        break;
+                    case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackRight :
+                        audioManager.PlayAudio("palm",0.5f);
+                        break;
                     case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack :
                         //audioManager.PlayAudio("doublePalm");
                         break;
                     case EnemyAttackSystem.EnemyAttackType.UpSideAttack :
                         //audioManager.PlayAudio("up");
+                        break;
+                    case EnemyAttackSystem.EnemyAttackType.UpSideAttackLeft :
+                        break;
+                    case EnemyAttackSystem.EnemyAttackType.UpSideAttackRight :
                         break;
                 }
                 break;
@@ -98,9 +112,17 @@ public class PlayerReaction : MonoBehaviour
                 return _debugHandLandMarks.DetectDoubleFist();
             case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack:
                 return _debugHandLandMarks.DetectSinglePalmAttack();
+            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackLeft:
+                return _debugHandLandMarks.DetectSinglePalmAttack();
+            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackRight:
+                return _debugHandLandMarks.DetectSinglePalmAttack();
             case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack:
                 return _debugHandLandMarks.DetectDoublePalmAttack();
             case EnemyAttackSystem.EnemyAttackType.UpSideAttack:
+                return _debugHandLandMarks.DetectPalmDownAttack();
+            case EnemyAttackSystem.EnemyAttackType.UpSideAttackLeft:
+                return _debugHandLandMarks.DetectPalmDownAttack();
+            case EnemyAttackSystem.EnemyAttackType.UpSideAttackRight:
                 return _debugHandLandMarks.DetectPalmDownAttack();
             default:
                 return false;
