@@ -53,7 +53,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.MiddleAttack, speed));
+            enemyAttackSystem.StartEnemyAttack(EnemyAttackSystem.EnemyAttackType.MiddleAttack, speed);
         }
         else
         {
@@ -64,7 +64,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttack, speed));
+            enemyAttackSystem.StartEnemyAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttack, speed);
         }
         else
         {
@@ -75,7 +75,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttackLeft, speed));
+            enemyAttackSystem.StartEnemyAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttackLeft, speed);
         }
         else
         {
@@ -86,7 +86,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttackRight, speed));
+            enemyAttackSystem.StartEnemyAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttackRight, speed);
         }
         else
         {
@@ -97,7 +97,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.DoublePalmAttack,speed));
+            enemyAttackSystem.StartEnemyAttack(EnemyAttackSystem.EnemyAttackType.DoublePalmAttack, speed);
         }
         else
         {
@@ -108,7 +108,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttack,speed));
+            enemyAttackSystem.StartEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttack, speed);
         }
         else
         {
@@ -119,8 +119,9 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttackLeft,speed));
+            enemyAttackSystem.StartEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttackLeft, speed);
         }
+
         else
         {
             Debug.LogError("EnemyAttackSystem is not initialized");
@@ -130,13 +131,15 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttackRight,speed));
+            enemyAttackSystem.StartEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttackRight, speed);
         }
         else
         {
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
+    
+    
     public void StopCounterAttack()
     {
         if (enemyAttackSystem != null)
@@ -148,6 +151,84 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
+    public void StopMiddleAttackCounter()
+    {
+        if (enemyAttackSystem != null)
+        {
+            enemyAttackSystem. StopSpecificEnemyAttack(EnemyAttackSystem.EnemyAttackType.MiddleAttack);
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    public void StopSinglePalmAttackCounter()
+    {
+        if (enemyAttackSystem != null)
+        {
+            enemyAttackSystem. StopSpecificEnemyAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttack);
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    public void StopDoublePalmAttackCounter()
+    {
+        if (enemyAttackSystem != null)
+        {
+            enemyAttackSystem. StopSpecificEnemyAttack(EnemyAttackSystem.EnemyAttackType.DoublePalmAttack);
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    public void StopLeftPalmAttackCounter()
+    {
+        if (enemyAttackSystem != null)
+        {
+            enemyAttackSystem. StopSpecificEnemyAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttackLeft);
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    public void StopRightPalmAttackCounter()
+    {
+        if (enemyAttackSystem != null)
+        {
+            enemyAttackSystem. StopSpecificEnemyAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttackRight);
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    public void StopLeftUpsideAttackCounter()
+    {
+        if (enemyAttackSystem != null)
+        {
+            enemyAttackSystem. StopSpecificEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttackLeft);
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    public void StopRightUpsideAttackCounter()
+    {
+        if (enemyAttackSystem != null)
+        {
+            enemyAttackSystem. StopSpecificEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttackRight);
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    
     
     public void SpawnTutorialMiddleAttack()
     {
@@ -160,7 +241,6 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-
     public void SpawnFistTutorialPrefab()
     {
         int index = 0;
@@ -173,7 +253,6 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-
     public void SpawnTutorialSinglePalmAttack()
     {
         if (enemyAttackSystem != null)
@@ -185,8 +264,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-    
-    public void SpawnTutorialLeftSideAttack()
+    /*public void SpawnTutorialLeftSideAttack()
     {
         if (enemyAttackSystem != null)
         {
@@ -197,7 +275,6 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-    
     public void SpawnTutoriaRightSideAttack()
     {
         if (enemyAttackSystem != null)
@@ -208,7 +285,8 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
         {
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
-    }
+    }*/
+    
     
     public void PlayMainTimeline()
     {
@@ -223,7 +301,6 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("TimelineManager is not initialized");
         }
     }
-    
     public void PlayTutorialTimeline()
     {
         audioManager.PlayAudio("tutorial part01",1f);
@@ -237,7 +314,6 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("TimelineManager is not initialized");
         }
     }
-    
     public void PlayAudio_tutorial_part01()
     {
         if (audioManager != null)

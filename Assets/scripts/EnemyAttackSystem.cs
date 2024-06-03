@@ -1,14 +1,17 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Timeline;
 
 public class EnemyAttackSystem : MonoBehaviour
 {
-    public GameObject [] tutorialPrefabs;
+    public GameObject[] tutorialPrefabs;
 
     private PlayerReaction playerReaction;
     private HealthSystem _healthSystem;
     private ScreenDamage _screenDamage;
+
+    // 用于存储正在运行的协程引用的字典
+    private Dictionary<EnemyAttackType, Coroutine> runningCoroutines = new Dictionary<EnemyAttackType, Coroutine>();
 
     void Start()
     {
@@ -37,9 +40,21 @@ public class EnemyAttackSystem : MonoBehaviour
     {
         public EnemyAttackType type; // 攻击类型
         public GameObject prefab;
-        //public AnimationClip animation;
     }
+
     public EnemyAttackMove[] enemyAttackMoves; // 保存所有攻击招式的数组
+
+    public void StartEnemyAttack(EnemyAttackType type, float speed)
+    {
+        // 启动协程并存储其引用
+        if (runningCoroutines.ContainsKey(type))
+        {
+            StopCoroutine(runningCoroutines[type]); // 停止已经在运行的同类型协程
+            runningCoroutines.Remove(type);
+        }
+        Coroutine attackCoroutine = StartCoroutine(SpawnEnemyAttack(type, speed));
+        runningCoroutines[type] = attackCoroutine;
+    }
 
     public IEnumerator SpawnEnemyAttack(EnemyAttackType type, float speed)
     {
@@ -75,11 +90,36 @@ public class EnemyAttackSystem : MonoBehaviour
         {
             Debug.LogWarning("Attack type not found: " + type);
         }
+
+        // 移除已经完成的协程引用
+        if (runningCoroutines.ContainsKey(type))
+        {
+            runningCoroutines.Remove(type);
+        }
     }
-    
-    public void DestroyPrefab(GameObject prefab)
+
+    public void StopSpecificEnemyAttack(EnemyAttackType type)
     {
-        Destroy(prefab);
+        if (playerReaction != null)
+        {
+            if (!playerReaction.successfulReaction)
+            {
+                Debug.Log("YOU DIE");
+                _healthSystem.TakeDamage(1);
+                _screenDamage.CurrentHealth -= 1f; 
+                Debug.Log("Health has been updated: " + _healthSystem.currentHealth);
+            }
+            if (runningCoroutines.ContainsKey(type))
+            {
+                StopCoroutine(runningCoroutines[type]);
+                runningCoroutines.Remove(type);
+            }
+        }
+        else
+        {
+            Debug.LogError("PlayerReaction is not initialized");
+        }
+        // 停止特定类型的协程
     }
 
     public void StopCounterAttack()
@@ -99,6 +139,11 @@ public class EnemyAttackSystem : MonoBehaviour
         {
             Debug.LogError("PlayerReaction is not initialized");
         }
+    }
+    
+    public void DestroyPrefab(GameObject prefab)
+    {
+        Destroy(prefab);
     }
     
     public IEnumerator SpawnTutorialAttack(EnemyAttackType type, int frameCount)
