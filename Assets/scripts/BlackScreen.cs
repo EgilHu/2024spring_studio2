@@ -59,6 +59,4 @@ public class BlackScreen : MonoBehaviour
     {
         StartCoroutine(FadeOut());
     }
-
-
 }
