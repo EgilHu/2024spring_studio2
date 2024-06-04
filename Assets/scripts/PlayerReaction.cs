@@ -1,35 +1,40 @@
 using System;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerReaction : MonoBehaviour
 {
     private DebugHandLandMarks _debugHandLandMarks;
-    //private HealthSystem _healthSystem;
     [SerializeField] private AudioManager audioManager;
-    
+
     public GameObject currentTutorialPrefab;
+
     void Start()
-    { 
+    {
         _debugHandLandMarks = FindObjectOfType<DebugHandLandMarks>();
-        //_healthSystem = FindObjectOfType<HealthSystem>();
     }
-    
+
     public Coroutine counterAttackCoroutine;
     public void ReactToSignal(EnemyAttackSystem.EnemyAttackType type)
     {
+        if (!reactionStatus.ContainsKey(type))
+        {
+            reactionStatus[type] = false; // 初始化反应状态
+        }
+
         switch (type)
         {
-            case EnemyAttackSystem.EnemyAttackType.LeftSideAttack :
-            case EnemyAttackSystem.EnemyAttackType.RightSideAttack :
-            case EnemyAttackSystem.EnemyAttackType.MiddleAttack :
-            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack :
-            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackLeft :
-            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackRight :
-            case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack :
-            case EnemyAttackSystem.EnemyAttackType.UpSideAttack :
-            case EnemyAttackSystem.EnemyAttackType.UpSideAttackLeft :
-            case EnemyAttackSystem.EnemyAttackType.UpSideAttackRight :
+            case EnemyAttackSystem.EnemyAttackType.LeftSideAttack:
+            case EnemyAttackSystem.EnemyAttackType.RightSideAttack:
+            case EnemyAttackSystem.EnemyAttackType.MiddleAttack:
+            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack:
+            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackLeft:
+            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackRight:
+            case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack:
+            case EnemyAttackSystem.EnemyAttackType.UpSideAttack:
+            case EnemyAttackSystem.EnemyAttackType.UpSideAttackLeft:
+            case EnemyAttackSystem.EnemyAttackType.UpSideAttackRight:
                 counterAttackCoroutine = StartCoroutine(CounterAttack(type));
                 break;
             default:
@@ -37,16 +42,19 @@ public class PlayerReaction : MonoBehaviour
                 break;
         }
     }
-    
-    public bool successfulReaction = false;
+
+    // 使用字典来记录每种攻击类型的反应状态
+    private Dictionary<EnemyAttackSystem.EnemyAttackType, bool> reactionStatus = new Dictionary<EnemyAttackSystem.EnemyAttackType, bool>();
+
     public GameObject playerAttackVFX;
+
     public System.Collections.IEnumerator CounterAttack(EnemyAttackSystem.EnemyAttackType type)
     {
         while (true)
         {
             if (GetCorrectReactionTypeForAttack(type))
             {
-                successfulReaction = true;
+                reactionStatus[type] = true;
                 Debug.Log("Successful counterattack!");
                 Instantiate(playerAttackVFX, Vector3.zero, Quaternion.identity);
                 if (currentTutorialPrefab != null)
@@ -54,52 +62,50 @@ public class PlayerReaction : MonoBehaviour
                     Destroy(currentTutorialPrefab);
                     currentTutorialPrefab = null;
                 }
-                switch (type)
-                {
-                    case EnemyAttackSystem.EnemyAttackType.LeftSideAttack :
-                        audioManager.PlayAudio("left", 0.5f);
-                        break;
-                    case EnemyAttackSystem.EnemyAttackType.RightSideAttack :
-                        audioManager.PlayAudio("right",0.5f);
-                        break;
-                    case EnemyAttackSystem.EnemyAttackType.MiddleAttack :
-                        audioManager.PlayAudio("fist",0.5f);
-                        Debug.Log("Fist sound played!");
-                        break;
-                    case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack :
-                        audioManager.PlayAudio("palm",0.5f);
-                        break;
-                    case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackLeft :
-                        audioManager.PlayAudio("palm",0.5f);
-                        break;
-                    case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackRight :
-                        audioManager.PlayAudio("palm",0.5f);
-                        break;
-                    case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack :
-                        //audioManager.PlayAudio("doublePalm");
-                        break;
-                    case EnemyAttackSystem.EnemyAttackType.UpSideAttack :
-                        //audioManager.PlayAudio("up");
-                        break;
-                    case EnemyAttackSystem.EnemyAttackType.UpSideAttackLeft :
-                        break;
-                    case EnemyAttackSystem.EnemyAttackType.UpSideAttackRight :
-                        break;
-                }
+                PlayAttackAudio(type);
                 break;
             }
-            successfulReaction = false;
+
             yield return null;
         }
-        
-        /*if (!successfulReaction)
-        {
-            Debug.Log("YOU DIE");
-            _healthSystem.TakeDamage(1);
-            Debug.Log("Health has been updated: " + _healthSystem.currentHealth);
-        } */
     }
-    
+
+    private void PlayAttackAudio(EnemyAttackSystem.EnemyAttackType type)
+    {
+        switch (type)
+        {
+            case EnemyAttackSystem.EnemyAttackType.LeftSideAttack:
+                audioManager.PlayAudio("left", 0.5f);
+                break;
+            case EnemyAttackSystem.EnemyAttackType.RightSideAttack:
+                audioManager.PlayAudio("right", 0.5f);
+                break;
+            case EnemyAttackSystem.EnemyAttackType.MiddleAttack:
+                audioManager.PlayAudio("fist", 0.5f);
+                Debug.Log("Fist sound played!");
+                break;
+            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack:
+                audioManager.PlayAudio("palm", 0.5f);
+                break;
+            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackLeft:
+                audioManager.PlayAudio("palm", 0.5f);
+                break;
+            case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackRight:
+                audioManager.PlayAudio("palm", 0.5f);
+                break;
+            case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack:
+                // audioManager.PlayAudio("doublePalm");
+                break;
+            case EnemyAttackSystem.EnemyAttackType.UpSideAttack:
+                // audioManager.PlayAudio("up");
+                break;
+            case EnemyAttackSystem.EnemyAttackType.UpSideAttackLeft:
+                break;
+            case EnemyAttackSystem.EnemyAttackType.UpSideAttackRight:
+                break;
+        }
+    }
+
     public bool GetCorrectReactionTypeForAttack(EnemyAttackSystem.EnemyAttackType type)
     {
         switch (type)
@@ -127,5 +133,10 @@ public class PlayerReaction : MonoBehaviour
             default:
                 return false;
         }
+    }
+
+    public bool IsReactionSuccessful(EnemyAttackSystem.EnemyAttackType type)
+    {
+        return reactionStatus.ContainsKey(type) && reactionStatus[type];
     }
 }

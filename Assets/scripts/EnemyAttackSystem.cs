@@ -10,7 +10,6 @@ public class EnemyAttackSystem : MonoBehaviour
     private HealthSystem _healthSystem;
     private ScreenDamage _screenDamage;
 
-    // 用于存储正在运行的协程引用的字典
     private Dictionary<EnemyAttackType, Coroutine> runningCoroutines = new Dictionary<EnemyAttackType, Coroutine>();
 
     void Start()
@@ -34,22 +33,20 @@ public class EnemyAttackSystem : MonoBehaviour
         UpSideAttackRight,
     }
 
-    /*招式类*/
     [System.Serializable]
     public class EnemyAttackMove
     {
-        public EnemyAttackType type; // 攻击类型
+        public EnemyAttackType type;
         public GameObject prefab;
     }
 
-    public EnemyAttackMove[] enemyAttackMoves; // 保存所有攻击招式的数组
+    public EnemyAttackMove[] enemyAttackMoves;
 
     public void StartEnemyAttack(EnemyAttackType type, float speed)
     {
-        // 启动协程并存储其引用
         if (runningCoroutines.ContainsKey(type))
         {
-            StopCoroutine(runningCoroutines[type]); // 停止已经在运行的同类型协程
+            StopCoroutine(runningCoroutines[type]);
             runningCoroutines.Remove(type);
         }
         Coroutine attackCoroutine = StartCoroutine(SpawnEnemyAttack(type, speed));
@@ -58,7 +55,6 @@ public class EnemyAttackSystem : MonoBehaviour
 
     public IEnumerator SpawnEnemyAttack(EnemyAttackType type, float speed)
     {
-        // 寻找对应类型的攻击招式
         EnemyAttackMove move = System.Array.Find(enemyAttackMoves, x => x.type == type);
         if (move != null)
         {
@@ -66,22 +62,22 @@ public class EnemyAttackSystem : MonoBehaviour
             Renderer renderer = attackObject.GetComponent<Renderer>();
             if (renderer != null)
             {
-                renderer.enabled = false; // 设置为不可见
+                renderer.enabled = false;
             }
             Animator animator = attackObject.GetComponent<Animator>();
             if (animator != null)
             {
-                animator.enabled = false; // 停止动画
+                animator.enabled = false;
             }
-            yield return null; // 等待下一帧
-            yield return new WaitForSeconds(0.1f); // 添加一个小的延迟
+            yield return null;
+            yield return new WaitForSeconds(0.1f);
             if (renderer != null)
             {
-                renderer.enabled = true; // 设置为可见
+                renderer.enabled = true;
             }
             if (animator != null)
             {
-                animator.enabled = true; // 开始播放动画
+                animator.enabled = true;
                 animator.speed = speed;
             }
             playerReaction.ReactToSignal(type);
@@ -91,7 +87,6 @@ public class EnemyAttackSystem : MonoBehaviour
             Debug.LogWarning("Attack type not found: " + type);
         }
 
-        // 移除已经完成的协程引用
         if (runningCoroutines.ContainsKey(type))
         {
             runningCoroutines.Remove(type);
@@ -102,11 +97,11 @@ public class EnemyAttackSystem : MonoBehaviour
     {
         if (playerReaction != null)
         {
-            if (!playerReaction.successfulReaction)
+            if (!playerReaction.IsReactionSuccessful(type))
             {
                 Debug.Log("YOU DIE");
                 _healthSystem.TakeDamage(1);
-                _screenDamage.CurrentHealth -= 1f; 
+                _screenDamage.CurrentHealth -= 1f;
                 Debug.Log("Health has been updated: " + _healthSystem.currentHealth);
             }
             if (runningCoroutines.ContainsKey(type))
@@ -119,20 +114,12 @@ public class EnemyAttackSystem : MonoBehaviour
         {
             Debug.LogError("PlayerReaction is not initialized");
         }
-        // 停止特定类型的协程
     }
 
     public void StopCounterAttack()
     {
         if (playerReaction != null)
         {
-            if (!playerReaction.successfulReaction)
-            {
-                Debug.Log("YOU DIE");
-                _healthSystem.TakeDamage(1);
-                _screenDamage.CurrentHealth -= 1f; 
-                Debug.Log("Health has been updated: " + _healthSystem.currentHealth);
-            }
             StopCoroutine(playerReaction.counterAttackCoroutine);
         }
         else
@@ -140,56 +127,44 @@ public class EnemyAttackSystem : MonoBehaviour
             Debug.LogError("PlayerReaction is not initialized");
         }
     }
-    
+
     public void DestroyPrefab(GameObject prefab)
     {
         Destroy(prefab);
     }
-    
+
     public IEnumerator SpawnTutorialAttack(EnemyAttackType type, int frameCount)
     {
-        // 生成指定类型的敌人攻击
         StartCoroutine(SpawnEnemyAttack(type, 1.0f));
 
-        // 等待指定的帧数
         for (int i = 0; i < frameCount; i++)
         {
             yield return null;
         }
 
-        // 暂停预制体的动画
         Animator animator = enemyAttackMoves[(int)type].prefab.GetComponent<Animator>();
         if (animator != null)
         {
-            // 暂停动画
             Time.timeScale = 0;
-            //Debug.Log("Animator disabled");
         }
 
-        // 等待玩家的回击
         while (true)
         {
             if (playerReaction.GetCorrectReactionTypeForAttack(type))
             {
-                // 玩家回击正确，恢复动画的播放
                 if (animator != null)
                 {
-                    // 恢复动画播放
                     Time.timeScale = 1;
-                    /*Debug.Log("Animator enabled");*/
                 }
 
-                // 延迟1帧
                 yield return null;
-
-                // 结束当前协程
                 yield break;
             }
 
             yield return null;
         }
     }
-    
+
     public void SpawnTutorialPrefab(int index)
     {
         if (index >= 0 && index < tutorialPrefabs.Length)
@@ -202,6 +177,4 @@ public class EnemyAttackSystem : MonoBehaviour
             Debug.LogWarning("Tutorial prefab index out of range: " + index);
         }
     }
-    
 }
-    
