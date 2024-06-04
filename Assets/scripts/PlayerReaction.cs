@@ -47,7 +47,7 @@ public class PlayerReaction : MonoBehaviour
     private Dictionary<EnemyAttackSystem.EnemyAttackType, bool> reactionStatus = new Dictionary<EnemyAttackSystem.EnemyAttackType, bool>();
 
     public GameObject playerAttackVFX;
-
+    public bool successfulReaction = false;
     public System.Collections.IEnumerator CounterAttack(EnemyAttackSystem.EnemyAttackType type)
     {
         while (true)
@@ -55,6 +55,7 @@ public class PlayerReaction : MonoBehaviour
             if (GetCorrectReactionTypeForAttack(type))
             {
                 reactionStatus[type] = true;
+                successfulReaction = true;
                 Debug.Log("Successful counterattack!");
                 Instantiate(playerAttackVFX, Vector3.zero, Quaternion.identity);
                 if (currentTutorialPrefab != null)
@@ -65,7 +66,8 @@ public class PlayerReaction : MonoBehaviour
                 PlayAttackAudio(type);
                 break;
             }
-
+            reactionStatus[type] = false;
+            successfulReaction = false;
             yield return null;
         }
     }

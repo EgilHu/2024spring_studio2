@@ -120,6 +120,13 @@ public class EnemyAttackSystem : MonoBehaviour
     {
         if (playerReaction != null)
         {
+            if (!playerReaction.successfulReaction)
+            {
+                Debug.Log("YOU DIE");
+                _healthSystem.TakeDamage(1);
+                _screenDamage.CurrentHealth -= 1f; 
+                Debug.Log("Health has been updated: " + _healthSystem.currentHealth);
+            }
             StopCoroutine(playerReaction.counterAttackCoroutine);
         }
         else

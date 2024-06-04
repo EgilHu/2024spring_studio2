@@ -1845,8 +1845,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioManager: {fileID: 999392137}
   currentTutorialPrefab: {fileID: 0}
-  successfulReaction: 0
   playerAttackVFX: {fileID: 1212038522573524, guid: d773d301d86b3254180a6887af308eef, type: 3}
+  successfulReaction: 0
 --- !u!4 &771725387
 Transform:
   m_ObjectHideFlags: 0
