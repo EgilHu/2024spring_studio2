@@ -54,4 +54,19 @@ public class TimelineManager : MonoBehaviour
             Debug.LogError("Invalid timeline index.");
         }
     }
+    
+    public void PauseAndPlayFromTime(int index, double time)
+    {
+        if (index >= 0 && index < timelineDirectors.Count)
+        {
+            timelineDirectors[index].Pause(); // 暂停当前的timeline
+            timelineDirectors[index].playableGraph.GetRootPlayable(0).SetTime(time); // 将时间指针设置到指定的时间点
+            timelineDirectors[index].Evaluate(); // 更新PlayableDirector的状态
+            timelineDirectors[index].Play(); // 从指定的时间点开始播放
+        }
+        else
+        {
+            Debug.LogError("Invalid timeline index.");
+        }
+    }
 }

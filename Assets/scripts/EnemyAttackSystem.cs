@@ -101,7 +101,7 @@ public class EnemyAttackSystem : MonoBehaviour
             {
                 Debug.Log("YOU DIE");
                 _healthSystem.TakeDamage(1);
-                _screenDamage.CurrentHealth -= 1f;
+                //_screenDamage.CurrentHealth -= 1f;
                 Debug.Log("Health has been updated: " + _healthSystem.currentHealth);
             }
             if (runningCoroutines.ContainsKey(type))

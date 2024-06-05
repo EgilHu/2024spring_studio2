@@ -6,6 +6,10 @@ public class CanvasController : MonoBehaviour
 {
     public GameObject[] prefabs; // 存储预制体的数组
     public float fadeSpeed = 0.5f; // 渐入渐出的速度
+    public float titleDuration = 3f; // 持续时间
+    public float bloodEffectFadeSpeed = 1f; // 血液特效的渐入渐出速度
+    public float bloodEffectDuration = 1f; // 血液特效的持续时间
+    //public GameObject bloodEffect;
 
     private BlackScreen blackScreen;
     // Start is called before the first frame update
@@ -28,8 +32,8 @@ public class CanvasController : MonoBehaviour
     {
         if (prefabIndex >= 0 && prefabIndex < prefabs.Length)
         {
-            GameObject prefab = Instantiate(prefabs[prefabIndex], Vector3.zero, Quaternion.identity);
-            StartCoroutine(FadeInOut(prefab));
+            GameObject prefab = Instantiate(prefabs[prefabIndex], prefabs[prefabIndex].transform.position, prefabs[prefabIndex].transform.rotation);
+            StartCoroutine(FadeInOut(prefab, fadeSpeed, titleDuration));
         }
         else
         {
@@ -37,13 +41,13 @@ public class CanvasController : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeInOut(GameObject prefab)
+    private IEnumerator FadeInOut(GameObject prefab, float Speed, float duration)
     {
         SpriteRenderer renderer = prefab.GetComponent<SpriteRenderer>();
         if (renderer != null)
         {
             // 渐入
-            for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / fadeSpeed)
+            for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / Speed)
             {
                 Color newColor = new Color(1, 1, 1, Mathf.Lerp(0, 1, t));
                 renderer.color = newColor;
@@ -51,10 +55,10 @@ public class CanvasController : MonoBehaviour
             }
 
             // 保持1秒
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(duration);
 
             // 渐出
-            for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / fadeSpeed)
+            for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / Speed)
             {
                 Color newColor = new Color(1, 1, 1, Mathf.Lerp(1, 0, t));
                 renderer.color = newColor;
@@ -63,5 +67,24 @@ public class CanvasController : MonoBehaviour
 
             Destroy(prefab); // 销毁预制体
         }
+    }
+    
+    private void SpawnWithFade(int prefabIndex, float speed,float duration)
+    { 
+        if (prefabIndex >= 0 && prefabIndex < prefabs.Length)
+        {
+            GameObject prefab = Instantiate(prefabs[prefabIndex], prefabs[prefabIndex].transform.position, prefabs[prefabIndex].transform.rotation);
+            StartCoroutine(FadeInOut(prefab, speed, duration));
+        }
+        else
+        {
+            Debug.LogWarning("Prefab index out of range: " + prefabIndex);
+        }
+    }
+    
+    public void SpawnBloodEffect()
+    {
+        SpawnWithFade(4, bloodEffectFadeSpeed, bloodEffectDuration);
+        //Debug.Log("Spawn blood effect.");
     }
 }
