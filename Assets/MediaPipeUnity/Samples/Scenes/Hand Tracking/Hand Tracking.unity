@@ -1958,7 +1958,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 1ae6c80ff2531774b8280eacd897b050, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7176471}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1979,7 +1979,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.16031, y: 0.16031, z: 0.16031}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2432,6 +2432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1000
   currentHealth: 0
+  lifeSquare: {fileID: 739300093}
 --- !u!4 &960989903
 Transform:
   m_ObjectHideFlags: 0
@@ -2593,7 +2594,7 @@ MonoBehaviour:
   musicSource: {fileID: 1040952945}
   sfxSource: {fileID: 2022417284}
   musicClips:
-  - {fileID: 8300000, guid: e22c6ddbf564c7848b210da75bec4738, type: 3}
+  - {fileID: 8300000, guid: 2a07e110b7993ec489356fa45b94ad9c, type: 3}
   sfxClips:
   - {fileID: 8300000, guid: b297ad53603c5334e8fb485bed21fb9e, type: 3}
   - {fileID: 8300000, guid: 5a1972116b9aea644b41ec7ef6753679, type: 3}
@@ -4456,7 +4457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!320 &2100171957
 PlayableDirector:
   m_ObjectHideFlags: 0

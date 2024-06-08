@@ -4,6 +4,7 @@ public class HealthSystem : MonoBehaviour
 {
     public int maxHealth = 3;
     public int currentHealth;
+    public GameObject lifeSquare;
     
     private TimelineManager _timelineManager;
     private CanvasController _canvasController;
@@ -20,6 +21,7 @@ public class HealthSystem : MonoBehaviour
     {
         currentHealth -= damageAmount;
         _canvasController.SpawnBloodEffect();
+        lifeSquare.transform.localScale *= 1.25f;
         if (currentHealth <= 0)
         {
             Die();
