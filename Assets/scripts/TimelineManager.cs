@@ -1,12 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using System.Collections;
 
 public class TimelineManager : MonoBehaviour
 {
     // 用于手动添加Timeline游戏物体的列表
     public List<PlayableDirector> timelineDirectors = new List<PlayableDirector>();
+    public AudioSource audioSource;
+    
+    private int currentPlayingIndex = -1; 
+    private BlackScreen blackScreen;
 
+    void Start()
+    {
+        blackScreen = FindObjectOfType<BlackScreen>();
+    }
+    
     // 在Inspector窗口中显示添加按钮
     [ContextMenu("Add Timeline")]
     void AddTimelineManually()
@@ -24,6 +34,7 @@ public class TimelineManager : MonoBehaviour
         if (index >= 0 && index < timelineDirectors.Count)
         {
             timelineDirectors[index].Play();
+            currentPlayingIndex = index;
         }
         else
         {
@@ -55,18 +66,43 @@ public class TimelineManager : MonoBehaviour
         }
     }
     
-    public void PauseAndPlayFromTime(int index, double time)
+    public void ResetTimeline()
     {
-        if (index >= 0 && index < timelineDirectors.Count)
+        if (currentPlayingIndex >= 0 && currentPlayingIndex < timelineDirectors.Count)
         {
-            timelineDirectors[index].Pause(); // 暂停当前的timeline
-            timelineDirectors[index].playableGraph.GetRootPlayable(0).SetTime(time); // 将时间指针设置到指定的时间点
-            timelineDirectors[index].Evaluate(); // 更新PlayableDirector的状态
-            timelineDirectors[index].Play(); // 从指定的时间点开始播放
+            PlayableDirector director = timelineDirectors[currentPlayingIndex];
+            //Debug.Log("Resetting timeline: " + director.name);
+            if (director.state == PlayState.Playing && audioSource.isPlaying)
+            {
+                StartCoroutine(ResetTimelineCoroutine(director));
+                Debug.Log("Resetting timeline: " + director.name);
+            }
         }
         else
         {
-            Debug.LogError("Invalid timeline index.");
+            Debug.LogError("No timeline is currently playing.");
         }
+    }
+
+    private IEnumerator ResetTimelineCoroutine(PlayableDirector director)
+    {
+        float startVolume = audioSource.volume;
+        
+        blackScreen.StartFadeOut();
+        
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / 3f;
+            yield return null;
+        }
+
+        audioSource.Stop();
+        audioSource.volume = startVolume;
+        
+       // yield return new WaitForSeconds(1f);
+
+        // Reset and play the timeline
+        director.time = 0;
+        director.Play();
     }
 }

@@ -264,28 +264,6 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-    /*public void SpawnTutorialLeftSideAttack()
-    {
-        if (enemyAttackSystem != null)
-        {
-            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.LeftSideAttack, 160));
-        }
-        else
-        {
-            Debug.LogError("EnemyAttackSystem is not initialized");
-        }
-    }
-    public void SpawnTutoriaRightSideAttack()
-    {
-        if (enemyAttackSystem != null)
-        {
-            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.RightSideAttack, 155));
-        }
-        else
-        {
-            Debug.LogError("EnemyAttackSystem is not initialized");
-        }
-    }*/
     
     
     public void PlayMainTimeline()
@@ -314,11 +292,24 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("TimelineManager is not initialized");
         }
     }
+    
+    
     public void PlayAudio_tutorial_part01()
     {
         if (audioManager != null)
         {
-            audioManager.PlayAudio("tutorial 01",0.75f);
+            audioManager.PlayAudio("tutorial 01",0.45f);
+        }
+        else
+        {
+            Debug.LogError("AudioManager is not initialized");
+        }
+    }
+    public void StopAudio_tutorial_part01()
+    {
+        if (audioManager != null)
+        {
+            audioManager.StopAudio("tutorial 01");
         }
         else
         {
