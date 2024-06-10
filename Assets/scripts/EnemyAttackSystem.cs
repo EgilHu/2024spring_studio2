@@ -5,10 +5,12 @@ using UnityEngine;
 public class EnemyAttackSystem : MonoBehaviour
 {
     public GameObject[] tutorialPrefabs;
+    public GameObject playerAttackVFX;
 
     private PlayerReaction playerReaction;
     private HealthSystem _healthSystem;
     private ScreenDamage _screenDamage;
+    private DebugHandLandMarks _debugHandLandMarks;
 
     private Dictionary<EnemyAttackType, Coroutine> runningCoroutines = new Dictionary<EnemyAttackType, Coroutine>();
 
@@ -17,6 +19,7 @@ public class EnemyAttackSystem : MonoBehaviour
         playerReaction = FindObjectOfType<PlayerReaction>();
         _screenDamage = FindObjectOfType<ScreenDamage>();
         _healthSystem = FindObjectOfType<HealthSystem>();
+        _debugHandLandMarks = FindObjectOfType<DebugHandLandMarks>();
     }
 
     public enum EnemyAttackType
@@ -172,16 +175,133 @@ public class EnemyAttackSystem : MonoBehaviour
         }
     }
 
-    public void SpawnTutorialPrefab(int index)
+    public void SpawnTutorialFistAni(int index)
     {
         if (index >= 0 && index < tutorialPrefabs.Length)
         {
             GameObject prefab = Instantiate(tutorialPrefabs[index], tutorialPrefabs[index].transform.position, Quaternion.identity);
             playerReaction.currentTutorialPrefab = prefab;
+
+            // Start the new coroutine
+            StartCoroutine(PlayFistAnimationThenResumeTimeline(prefab));
         }
         else
         {
             Debug.LogWarning("Tutorial prefab index out of range: " + index);
+        }
+    }
+    public void SpawnTutorialSPalmAni(int index)
+    {
+        if (index >= 0 && index < tutorialPrefabs.Length)
+        {
+            GameObject prefab = Instantiate(tutorialPrefabs[index], tutorialPrefabs[index].transform.position, Quaternion.identity);
+            playerReaction.currentTutorialPrefab = prefab;
+
+            // Start the new coroutine
+            StartCoroutine(PlaySPalmAnimationThenResumeTimeline(prefab));
+        }
+        else
+        {
+            Debug.LogWarning("Tutorial prefab index out of range: " + index);
+        }
+    }
+    public void SpawnTutorialUSidePalmAni(int index)
+    {
+        if (index >= 0 && index < tutorialPrefabs.Length)
+        {
+            GameObject prefab = Instantiate(tutorialPrefabs[index], tutorialPrefabs[index].transform.position, Quaternion.identity);
+            playerReaction.currentTutorialPrefab = prefab;
+
+            // Start the new coroutine
+            StartCoroutine(PlayUSidePalmAnimationThenResumeTimeline(prefab));
+        }
+        else
+        {
+            Debug.LogWarning("Tutorial prefab index out of range: " + index);
+        }
+    }
+    
+    
+    private IEnumerator PlayFistAnimationThenResumeTimeline(GameObject prefab)
+    {
+        // Wait for 1 second
+        yield return new WaitForSeconds(1f);
+
+        // Pause the timeline but keep the prefab animation playing
+        Time.timeScale = 0;
+        Animator animator = prefab.GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.updateMode = AnimatorUpdateMode.UnscaledTime; // Set the animator to ignore time scale
+        }
+
+        // Wait until _debugHandLandMarks.DetectDoubleFist() returns true
+        while (!_debugHandLandMarks.DetectDoubleFist())
+        {
+            yield return null;
+        }
+
+        // Resume the timeline
+        Instantiate(playerAttackVFX, Vector3.zero, Quaternion.identity);
+        Time.timeScale = 1;
+        Destroy(prefab);
+        if (animator != null)
+        {
+            animator.updateMode = AnimatorUpdateMode.Normal; // Set the animator back to normal update mode
+        }
+    }
+    private IEnumerator PlaySPalmAnimationThenResumeTimeline(GameObject prefab)
+    {
+        // Wait for 1 second
+        yield return new WaitForSeconds(1f);
+
+        // Pause the timeline but keep the prefab animation playing
+        Time.timeScale = 0;
+        Animator animator = prefab.GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.updateMode = AnimatorUpdateMode.UnscaledTime; // Set the animator to ignore time scale
+        }
+        
+        while (!_debugHandLandMarks.DetectSinglePalmAttack())
+        {
+            yield return null;
+        }
+
+        // Resume the timeline
+        Instantiate(playerAttackVFX, Vector3.zero, Quaternion.identity);
+        Time.timeScale = 1;
+        Destroy(prefab);
+        if (animator != null)
+        {
+            animator.updateMode = AnimatorUpdateMode.Normal; // Set the animator back to normal update mode
+        }
+    }
+    private IEnumerator PlayUSidePalmAnimationThenResumeTimeline(GameObject prefab)
+    {
+        // Wait for 1 second
+        yield return new WaitForSeconds(1f);
+
+        // Pause the timeline but keep the prefab animation playing
+        Time.timeScale = 0;
+        Animator animator = prefab.GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.updateMode = AnimatorUpdateMode.UnscaledTime; // Set the animator to ignore time scale
+        }
+        
+        while (!_debugHandLandMarks.DetectPalmDownAttack())
+        {
+            yield return null;
+        }
+
+        // Resume the timeline
+        Instantiate(playerAttackVFX, Vector3.zero, Quaternion.identity);
+        Time.timeScale = 1;
+        Destroy(prefab);
+        if (animator != null)
+        {
+            animator.updateMode = AnimatorUpdateMode.Normal; // Set the animator back to normal update mode
         }
     }
 }

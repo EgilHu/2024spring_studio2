@@ -8,7 +8,7 @@ public class CanvasController : MonoBehaviour
     public float fadeSpeed = 0.5f; // 渐入渐出的速度
     public float titleDuration = 3f; // 持续时间
     public float tutorialFadeSpeed = 0.5f; // 教程文本的渐入渐出速度
-    public float tutorialDuration = 3f; // 教程文本的持续时间
+    public float tutorialDuration = 1f; // 教程文本的持续时间
     public float bloodEffectFadeSpeed = 1f; // 血液特效的渐入渐出速度
     public float bloodEffectDuration = 1f; // 血液特效的持续时间
     //public GameObject bloodEffect;

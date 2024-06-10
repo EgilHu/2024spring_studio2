@@ -246,18 +246,30 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
         int index = 0;
         if (enemyAttackSystem != null)
         {
-            enemyAttackSystem.SpawnTutorialPrefab(index);
+            enemyAttackSystem.SpawnTutorialFistAni(index);
         }
         else
         {
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-    public void SpawnTutorialSinglePalmAttack()
+    public void SpwanTutorialSinglePalmAttack()
+    {
+        /*int index = 1;*/
+        if (enemyAttackSystem != null)
+        {
+            enemyAttackSystem.SpawnTutorialSPalmAni(1);
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    public void SpawnTutorialUSideAttack()
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttack, 95));
+            enemyAttackSystem.SpawnTutorialUSidePalmAni(2);
         }
         else
         {
