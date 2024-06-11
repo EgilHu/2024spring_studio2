@@ -43,6 +43,18 @@ public class CanvasController : MonoBehaviour
         }
     }
 
+    public void SpawnTutorialLongTextWithFade(int prefabIndex)
+    {
+        if (prefabIndex >= 0 && prefabIndex < prefabs.Length)
+        {
+            GameObject prefab = Instantiate(prefabs[prefabIndex], prefabs[prefabIndex].transform.position, prefabs[prefabIndex].transform.rotation);
+            StartCoroutine(FadeInOut(prefab, tutorialFadeSpeed, 5));
+        }
+        else
+        {
+            Debug.LogWarning("Prefab index out of range: " + prefabIndex);
+        }
+    }
     public void SpawnTutorialTextWithFade(int prefabIndex)
     {
         if (prefabIndex >= 0 && prefabIndex < prefabs.Length)
