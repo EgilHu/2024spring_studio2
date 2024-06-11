@@ -230,6 +230,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     }
     
     
+    //教程关中间停止动画
     public void SpawnTutorialMiddleAttack()
     {
         if (enemyAttackSystem != null)
@@ -241,6 +242,42 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
+    public void SpawnTutorialSPalmAttack()
+    {
+        if (enemyAttackSystem != null)
+        {
+            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.SinglePalmAttack, 85));
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    public void SpawnTutorialUSideAttack()
+    {
+        if (enemyAttackSystem != null)
+        {
+            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttack, 85));
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    public void SpawnTutorialDPalmAttack()
+    {
+        if (enemyAttackSystem != null)
+        {
+            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.DoublePalmAttack, 85));
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    
+    
+    //教程关手势动画
     public void SpawnFistTutorialPrefab()
     {
         int index = 0;
@@ -253,7 +290,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-    public void SpwanTutorialSinglePalmAttack()
+    public void SpwanTutorialSPalmAni()
     {
         /*int index = 1;*/
         if (enemyAttackSystem != null)
@@ -265,7 +302,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-    public void SpawnTutorialUSideAttack()
+    public void SpawnTutorialUSideAni()
     {
         if (enemyAttackSystem != null)
         {
