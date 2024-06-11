@@ -220,6 +220,21 @@ public class EnemyAttackSystem : MonoBehaviour
             Debug.LogWarning("Tutorial prefab index out of range: " + index);
         }
     }
+    public void SpawnTutorialDPalmAni(int index)
+    {
+        if (index >= 0 && index < tutorialPrefabs.Length)
+        {
+            GameObject prefab = Instantiate(tutorialPrefabs[index], tutorialPrefabs[index].transform.position, Quaternion.identity);
+            playerReaction.currentTutorialPrefab = prefab;
+
+            // Start the new coroutine
+            StartCoroutine(PlayDPalmAnimationThenResumeTimeline(prefab));
+        }
+        else
+        {
+            Debug.LogWarning("Tutorial prefab index out of range: " + index);
+        }
+    }
     
     
     private IEnumerator PlayFistAnimationThenResumeTimeline(GameObject prefab)
@@ -291,6 +306,33 @@ public class EnemyAttackSystem : MonoBehaviour
         }
         
         while (!_debugHandLandMarks.DetectPalmDownAttack())
+        {
+            yield return null;
+        }
+
+        // Resume the timeline
+        Instantiate(playerAttackVFX, Vector3.zero, Quaternion.identity);
+        Time.timeScale = 1;
+        Destroy(prefab);
+        if (animator != null)
+        {
+            animator.updateMode = AnimatorUpdateMode.Normal; // Set the animator back to normal update mode
+        }
+    }
+    private IEnumerator PlayDPalmAnimationThenResumeTimeline(GameObject prefab)
+    {
+        // Wait for 1 second
+        yield return new WaitForSeconds(1f);
+
+        // Pause the timeline but keep the prefab animation playing
+        Time.timeScale = 0;
+        Animator animator = prefab.GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.updateMode = AnimatorUpdateMode.UnscaledTime; // Set the animator to ignore time scale
+        }
+        
+        while (!_debugHandLandMarks.DetectDoublePalmAttack())
         {
             yield return null;
         }

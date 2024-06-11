@@ -1030,6 +1030,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f1fa1d1344d210644bb9e4bf09c4ed68, type: 2}
     - {fileID: 11400000, guid: 5990ec40b383c104aba8a7b8cef6abc0, type: 2}
     - {fileID: 11400000, guid: c7bff9c09aef79e4f948e3d42e2dadb6, type: 2}
+    - {fileID: 11400000, guid: a620e08a5e14bfd4c91ece58fe957dc1, type: 2}
+    - {fileID: 11400000, guid: 6f02cd77f8687d948a7ce682b7ded0e3, type: 2}
+    - {fileID: 11400000, guid: e54a75cd2285a3d4ea7d66c45cc1ca64, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -1498,6 +1501,48 @@ MonoBehaviour:
         - m_Target: {fileID: 449354389}
           m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
           m_MethodName: StopUpsideAttackCounter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 449354389}
+          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
+          m_MethodName: SpawnTutorialDPalmAni
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 449354389}
+          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
+          m_MethodName: PlayTutorialTimeline02
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 449354389}
+          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
+          m_MethodName: PlayTutorialTimeline03
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3692,6 +3737,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1287097506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1287097508}
+  - component: {fileID: 1287097507}
+  m_Layer: 0
+  m_Name: TutorialTimeline02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!320 &1287097507
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287097506}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: bef5d2938df215046a12e5706daddebc, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 7724246993808488947, guid: bef5d2938df215046a12e5706daddebc, type: 2}
+    value: {fileID: 449354390}
+  - key: {fileID: 7723166713082541336, guid: bef5d2938df215046a12e5706daddebc, type: 2}
+    value: {fileID: 1793983670}
+  m_ExposedReferences:
+    m_References: []
+--- !u!4 &1287097508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287097506}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.1522012, y: 0.4318626, z: 0.24674246}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1296559334
 GameObject:
   m_ObjectHideFlags: 0
@@ -3722,9 +3820,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timelineDirectors:
-  - {fileID: 1565279991}
   - {fileID: 2100171957}
+  - {fileID: 1565279991}
+  - {fileID: 1287097507}
   - {fileID: 1005431260}
+  - {fileID: 2015811431}
   - {fileID: 101417494}
   - {fileID: 1278308712}
   - {fileID: 2111795002}
@@ -4997,6 +5097,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2015811430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2015811432}
+  - component: {fileID: 2015811431}
+  m_Layer: 0
+  m_Name: TutorialTimeline03
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!320 &2015811431
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015811430}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 2e0fe229a7c816e4ab285f308cc70ebe, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -216918128168597367, guid: 2e0fe229a7c816e4ab285f308cc70ebe, type: 2}
+    value: {fileID: 449354390}
+  m_ExposedReferences:
+    m_References: []
+--- !u!4 &2015811432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015811430}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.1522012, y: 0.4318626, z: 0.24674246}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2022417283
 GameObject:
   m_ObjectHideFlags: 0
@@ -5136,7 +5287,7 @@ GameObject:
   - component: {fileID: 2100171958}
   - component: {fileID: 2100171957}
   m_Layer: 0
-  m_Name: TutorialTimeline
+  m_Name: TutorialTimeline01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7604,7 +7755,9 @@ SceneRoots:
   - {fileID: 1296559336}
   - {fileID: 2100171958}
   - {fileID: 1565279992}
+  - {fileID: 1287097508}
   - {fileID: 1005431261}
+  - {fileID: 2015811432}
   - {fileID: 101417495}
   - {fileID: 1278308713}
   - {fileID: 2111795003}

@@ -324,12 +324,23 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
-    
-    
-    public void PlayMainTimelineLevel01()
+    public void SpawnTutorialDPalmAni()
     {
-        audioManager.StopAudio("tutorial part01");
-        timelineManager.PauseTimeline(1);
+        if (enemyAttackSystem != null)
+        {
+            enemyAttackSystem.SpawnTutorialDPalmAni(3);
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
+    
+    
+    public void PlayTutorialTimeline01()
+    {
+        audioManager.PlayAudio("tutorial part01",1f);
+        //timelineManager.PauseTimeline(0);
         if (timelineManager != null)
         {
             timelineManager.PlayTimeline(0);
@@ -339,9 +350,9 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("TimelineManager is not initialized");
         }
     }
-    public void PlayTutorialTimeline()
+    public void PlayMainTimelineLevel01()
     {
-        audioManager.PlayAudio("tutorial part01",1f);
+        audioManager.StopAudio("tutorial part01");
         timelineManager.PauseTimeline(0);
         if (timelineManager != null)
         {
@@ -352,9 +363,10 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("TimelineManager is not initialized");
         }
     }
-    public void PlayMainTimelineLevel02()
+    public void PlayTutorialTimeline02()
     {
-        timelineManager.PauseTimeline(0);
+        audioManager.PlayAudio("tutorial part02",1f);
+        timelineManager.PauseTimeline(1);
         if (timelineManager != null)
         {
             timelineManager.PlayTimeline(2);
@@ -364,7 +376,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("TimelineManager is not initialized");
         }
     }
-    public void PlayMainTimelineLevel03()
+    public void PlayMainTimelineLevel02()
     {
         timelineManager.PauseTimeline(2);
         if (timelineManager != null)
@@ -376,8 +388,9 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("TimelineManager is not initialized");
         }
     }
-    public void PlayMainTimelineLevel04()
+    public void PlayTutorialTimeline03()
     {
+        audioManager.PlayAudio("tutorial part02",1f);
         timelineManager.PauseTimeline(3);
         if (timelineManager != null)
         {
@@ -388,12 +401,36 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("TimelineManager is not initialized");
         }
     }
-    public void PlayOutroTimeline()
+    public void PlayMainTimelineLevel03()
     {
         timelineManager.PauseTimeline(4);
         if (timelineManager != null)
         {
             timelineManager.PlayTimeline(5);
+        }
+        else
+        {
+            Debug.LogError("TimelineManager is not initialized");
+        }
+    }
+    public void PlayMainTimelineLevel04()
+    {
+        timelineManager.PauseTimeline(5);
+        if (timelineManager != null)
+        {
+            timelineManager.PlayTimeline(6);
+        }
+        else
+        {
+            Debug.LogError("TimelineManager is not initialized");
+        }
+    }
+    public void PlayOutroTimeline()
+    {
+        timelineManager.PauseTimeline(6);
+        if (timelineManager != null)
+        {
+            timelineManager.PlayTimeline(7);
         }
         else
         {
