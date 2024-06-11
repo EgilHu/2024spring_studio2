@@ -1005,10 +1005,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f99f0718da2678c4594ee1119f704fa9, type: 2}
     - {fileID: 11400000, guid: 3d4cf01641be9d6489c4f23178352ee9, type: 2}
     - {fileID: 11400000, guid: 72b572101de99ac489fbb988be03faba, type: 2}
-    - {fileID: 11400000, guid: d93683843479b9c4881c09d0ea9a98bb, type: 2}
     - {fileID: 11400000, guid: ddb0502adb73f11408c80aed73518e7d, type: 2}
-    - {fileID: 11400000, guid: 180f083f90fbed04b98efac47c5c9e33, type: 2}
-    - {fileID: 11400000, guid: e061fdab3cc82b347a5dc2e39e718262, type: 2}
     - {fileID: 11400000, guid: a4baf13722102a2408b58e2b4a4a9e97, type: 2}
     - {fileID: 11400000, guid: e75bcb2fd566ac5479d870294ce96ceb, type: 2}
     - {fileID: 11400000, guid: 66f6a5a3ef3894d41bf84119d9766c65, type: 2}
@@ -1023,7 +1020,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 1fcdeb2dad36b7d42a3cc59350d03971, type: 2}
     - {fileID: 11400000, guid: 067c8896a0624f947a6651c4c18f30c9, type: 2}
     - {fileID: 11400000, guid: 7431664abdb1b8147a6c1f985e9a59f1, type: 2}
-    - {fileID: 11400000, guid: 747aa17bbd5ca2c499c0eacc5bc405f1, type: 2}
     - {fileID: 11400000, guid: 4353f8d6ef8686048bb06ceafd57aff3, type: 2}
     - {fileID: 11400000, guid: d345bff19f942e845a1c28b05652064a, type: 2}
     - {fileID: 11400000, guid: 1b8d6bad284c4d74aa1766d262746e22, type: 2}
@@ -1032,6 +1028,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 02596ecf88dc8ae409f82ae8df34780d, type: 2}
     - {fileID: 11400000, guid: e4a83471d8fc0db4099a3a35074d1bce, type: 2}
     - {fileID: 11400000, guid: f1fa1d1344d210644bb9e4bf09c4ed68, type: 2}
+    - {fileID: 11400000, guid: 5990ec40b383c104aba8a7b8cef6abc0, type: 2}
+    - {fileID: 11400000, guid: c7bff9c09aef79e4f948e3d42e2dadb6, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -1163,49 +1161,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 449354389}
           m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
-          m_MethodName: SpawnTutorialSinglePalmAttack
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 449354389}
-          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
           m_MethodName: PlayTutorialTimeline
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 449354389}
-          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
-          m_MethodName: SpawnTutorialLeftSideAttack
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 449354389}
-          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
-          m_MethodName: SpawnTutoriaRightSideAttack
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1412,8 +1368,6 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     - m_PersistentCalls:
-        m_Calls: []
-    - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 449354389}
           m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
@@ -1516,6 +1470,34 @@ MonoBehaviour:
         - m_Target: {fileID: 449354389}
           m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
           m_MethodName: PlayOutroTimeline
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 449354389}
+          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
+          m_MethodName: StopSinglePalmAttackCounter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 449354389}
+          m_TargetAssemblyTypeName: EnemyAttackTimelineEvent, Assembly-CSharp
+          m_MethodName: StopUpsideAttackCounter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

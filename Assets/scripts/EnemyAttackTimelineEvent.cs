@@ -206,6 +206,17 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("EnemyAttackSystem is not initialized");
         }
     }
+    public void StopUpsideAttackCounter()
+    {
+        if (enemyAttackSystem != null)
+        {
+            enemyAttackSystem. StopSpecificEnemyAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttack);
+        }
+        else
+        {
+            Debug.LogError("EnemyAttackSystem is not initialized");
+        }
+    }
     public void StopLeftUpsideAttackCounter()
     {
         if (enemyAttackSystem != null)
