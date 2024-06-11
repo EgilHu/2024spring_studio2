@@ -2828,8 +2828,12 @@ MonoBehaviour:
   musicClips:
   - {fileID: 8300000, guid: 2a07e110b7993ec489356fa45b94ad9c, type: 3}
   sfxClips:
-  - {fileID: 8300000, guid: b297ad53603c5334e8fb485bed21fb9e, type: 3}
+  - {fileID: 8300000, guid: 48afe0074b791e54abf645e3387dec1a, type: 3}
+  - {fileID: 8300000, guid: da755a7049585664ba065b04c6550c96, type: 3}
   - {fileID: 8300000, guid: 5a1972116b9aea644b41ec7ef6753679, type: 3}
+  - {fileID: 8300000, guid: 77a4e39bdb9768749a24a53c419ca832, type: 3}
+  - {fileID: 8300000, guid: 3969dda471f69994fb45f4163626b53d, type: 3}
+  - {fileID: 8300000, guid: 5d8c01909c9022441a02c6baf05d87cf, type: 3}
 --- !u!1 &1005431259
 GameObject:
   m_ObjectHideFlags: 0
@@ -3035,7 +3039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1115365865
 MonoBehaviour:
   m_ObjectHideFlags: 0

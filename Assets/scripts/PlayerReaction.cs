@@ -83,27 +83,28 @@ public class PlayerReaction : MonoBehaviour
                 audioManager.PlayAudio("right", 0.5f);
                 break;
             case EnemyAttackSystem.EnemyAttackType.MiddleAttack:
-                audioManager.PlayAudio("fist", 0.5f);
-                Debug.Log("Fist sound played!");
+                audioManager.PlayAudio("fist", 0.8f);
                 break;
             case EnemyAttackSystem.EnemyAttackType.SinglePalmAttack:
-                audioManager.PlayAudio("palm", 0.5f);
+                audioManager.PlayAudio("palm1", 1f);
                 break;
             case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackLeft:
-                audioManager.PlayAudio("palm", 0.5f);
+                audioManager.PlayAudio("palm1", 1f);
                 break;
             case EnemyAttackSystem.EnemyAttackType.SinglePalmAttackRight:
-                audioManager.PlayAudio("palm", 0.5f);
+                audioManager.PlayAudio("palm1", 1f);
                 break;
             case EnemyAttackSystem.EnemyAttackType.DoublePalmAttack:
-                // audioManager.PlayAudio("doublePalm");
+                audioManager.PlayAudio("palm2", 1f);
                 break;
             case EnemyAttackSystem.EnemyAttackType.UpSideAttack:
-                // audioManager.PlayAudio("up");
+                audioManager.PlayAudio("down palm", 1f);
                 break;
             case EnemyAttackSystem.EnemyAttackType.UpSideAttackLeft:
+                audioManager.PlayAudio("down palm", 1f);
                 break;
             case EnemyAttackSystem.EnemyAttackType.UpSideAttackRight:
+                audioManager.PlayAudio("down palm", 1f);
                 break;
         }
     }

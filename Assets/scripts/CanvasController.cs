@@ -76,7 +76,7 @@ public class CanvasController : MonoBehaviour
             // 渐入
             for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / Speed)
             {
-                Color newColor = new Color(1, 1, 1, Mathf.Lerp(0, 1, t));
+                Color newColor = new Color(renderer.color.r, renderer.color.g, renderer.color.b, Mathf.Lerp(0, 1, t));
                 renderer.color = newColor;
                 yield return null;
             }
@@ -87,7 +87,7 @@ public class CanvasController : MonoBehaviour
             // 渐出
             for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / Speed)
             {
-                Color newColor = new Color(1, 1, 1, Mathf.Lerp(1, 0, t));
+                Color newColor = new Color(renderer.color.r, renderer.color.g, renderer.color.b, Mathf.Lerp(1, 0, t));
                 renderer.color = newColor;
                 yield return null;
             }

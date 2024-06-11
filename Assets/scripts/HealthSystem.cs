@@ -11,6 +11,7 @@ public class HealthSystem : MonoBehaviour
     private CanvasController _canvasController;
     private BlackScreen _blackScreen;
     private BlurEffect _blurEffect;
+    private AudioManager _audioManager;
     void Start()
     {
         currentHealth = maxHealth;
@@ -18,6 +19,7 @@ public class HealthSystem : MonoBehaviour
         _canvasController = FindObjectOfType<CanvasController>();
         _blackScreen = FindObjectOfType<BlackScreen>();
         _blurEffect = FindObjectOfType<BlurEffect>();
+        _audioManager = FindObjectOfType<AudioManager>();
     }
     
     IEnumerator CameraShake(float duration, float magnitude)
@@ -65,6 +67,11 @@ public class HealthSystem : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+            _audioManager.PlayAudio("die", 1f);
+        }
+        else
+        {
+            _audioManager.PlayAudio("hurt", 1f);
         }
     }
 
