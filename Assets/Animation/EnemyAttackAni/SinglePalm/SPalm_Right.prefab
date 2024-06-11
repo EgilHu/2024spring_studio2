@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4815931850132347719}
   - component: {fileID: 1276495970219184314}
   - component: {fileID: 3575763950976251337}
+  - component: {fileID: 7524722994265937084}
   m_Layer: 0
   m_Name: SPalm_Right
   m_TagString: Untagged
@@ -106,3 +107,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7524722994265937084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8733508828734658003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1f81419de937445bdcbfdf8de94ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
