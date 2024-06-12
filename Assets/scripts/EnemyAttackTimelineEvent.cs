@@ -339,7 +339,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     
     public void PlayTutorialTimeline01()
     {
-        audioManager.PlayAudio("tutorial part01",1f);
+        //audioManager.PlayAudio("tutorial 01",1f);
         //timelineManager.PauseTimeline(0);
         if (timelineManager != null)
         {
@@ -352,7 +352,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     }
     public void PlayMainTimelineLevel01()
     {
-        audioManager.StopAudio("tutorial part01");
+        //audioManager.StopAudio("tutorial part01");
         timelineManager.PauseTimeline(0);
         if (timelineManager != null)
         {

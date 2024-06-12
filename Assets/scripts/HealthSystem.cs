@@ -47,20 +47,22 @@ public class HealthSystem : MonoBehaviour
     {
         currentHealth -= damageAmount;
         _canvasController.SpawnBloodEffect();
-        lifeSquare.transform.localScale *= 1.25f;
+        lifeSquare.transform.localScale *= 1.3f;
         StartCoroutine(CameraShake(0.15f, 0.3f));
         
         Animator animator = lifeSquare.GetComponent<Animator>();
         if (animator != null)
         {
-            animator.speed *= 1.2f;
+            animator.speed *= 1.35f;
         }
         
         SpriteRenderer spriteRenderer = lifeSquare.GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
             Color color = spriteRenderer.color;
-            color.a *= 0.8f;
+            color.g = Mathf.Max(color.g - 0.04f, 0);
+            color.b = Mathf.Max(color.b +0.05f, 0);
+            color.a *= 0.9f;
             spriteRenderer.color = color;
         }
         
@@ -76,9 +78,9 @@ public class HealthSystem : MonoBehaviour
     }
 
     // 生命值回满
-    public void ResetHealth()
+    public void ResetHealth(int newHealth)
     {
-        currentHealth = maxHealth;
+        currentHealth =  newHealth;
         lifeSquare.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
                  
         Animator animator = lifeSquare.GetComponent<Animator>();
@@ -90,9 +92,9 @@ public class HealthSystem : MonoBehaviour
         SpriteRenderer spriteRenderer = lifeSquare.GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
-            Color color = spriteRenderer.color;
+            Color color = new Color(1f, 0.79f, 0.30f); // 假设初始颜色为(0.79, 0.79, 0.79, 1f
             color.a = 180f; 
-            spriteRenderer.color = color;
+            spriteRenderer.color= color;
         }
         
         _blurEffect.DisableBlur();
