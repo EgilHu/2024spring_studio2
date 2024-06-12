@@ -322,7 +322,7 @@ public class EnemyAttackSystem : MonoBehaviour
     private IEnumerator PlayDPalmAnimationThenResumeTimeline(GameObject prefab)
     {
         // Wait for 1 second
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         // Pause the timeline but keep the prefab animation playing
         Time.timeScale = 0;

@@ -279,7 +279,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.DoublePalmAttack, 85));
+            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.DoublePalmAttack, 75));
         }
         else
         {
@@ -450,11 +450,33 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
             Debug.LogError("AudioManager is not initialized");
         }
     }
+    public void PlayAudio_tutorial_part02()
+    {
+        if (audioManager != null)
+        {
+            audioManager.PlayAudio("tutorial 02",0.45f);
+        }
+        else
+        {
+            Debug.LogError("AudioManager is not initialized");
+        }
+    }
     public void StopAudio_tutorial_part01()
     {
         if (audioManager != null)
         {
             audioManager.StopAudio("tutorial 01");
+        }
+        else
+        {
+            Debug.LogError("AudioManager is not initialized");
+        }
+    }
+    public void StopAudio_tutorial_part02()
+    {
+        if (audioManager != null)
+        {
+            audioManager.StopAudio("tutorial 02");
         }
         else
         {
