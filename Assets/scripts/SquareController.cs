@@ -5,6 +5,8 @@ using UnityEngine;
 public class SquareController : MonoBehaviour
 {
     public GameObject square;
+
+    public GameObject circle;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,5 +27,15 @@ public class SquareController : MonoBehaviour
     public void SetInactive()
     {
         square.gameObject.SetActive(false);
+    }
+    
+    public void SetCircleActive()
+    {
+        circle.gameObject.SetActive(true);
+    }
+    
+    public void SetCircleInactive()
+    {
+        circle.gameObject.SetActive(false);
     }
 }

@@ -268,7 +268,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     {
         if (enemyAttackSystem != null)
         {
-            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttack, 85));
+            StartCoroutine(enemyAttackSystem.SpawnTutorialAttack(EnemyAttackSystem.EnemyAttackType.UpSideAttack, 95));
         }
         else
         {
@@ -365,7 +365,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     }
     public void PlayTutorialTimeline02()
     {
-        audioManager.PlayAudio("tutorial part02",1f);
+        //audioManager.PlayAudio("tutorial part02",1f);
         timelineManager.PauseTimeline(1);
         if (timelineManager != null)
         {
@@ -390,7 +390,7 @@ public class EnemyAttackTimelineEvent : MonoBehaviour
     }
     public void PlayTutorialTimeline03()
     {
-        audioManager.PlayAudio("tutorial part02",1f);
+        //audioManager.PlayAudio("tutorial part02",1f);
         timelineManager.PauseTimeline(3);
         if (timelineManager != null)
         {

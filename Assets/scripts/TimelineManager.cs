@@ -89,6 +89,7 @@ public class TimelineManager : MonoBehaviour
         float startVolume = audioSource.volume;
         
         blackScreen.StartFadeOut();
+        director.time = 0;
         
         while (audioSource.volume > 0)
         {
@@ -102,7 +103,7 @@ public class TimelineManager : MonoBehaviour
        // yield return new WaitForSeconds(1f);
 
         // Reset and play the timeline
-        director.time = 0;
+        //director.time = 0;
         director.Play();
     }
 }
